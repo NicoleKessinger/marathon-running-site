@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicole's Run Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #0d0d0d;
+      --ink:        #1a1a1a;
+      --newsprint:  #f5f1e8;
+      --rule:       #1a1a1a;
+      --cobalt:     #0047AB;
+      --light-blue: #A8C8E8;
+      --orange:     #E85D04;
+    }
+
+    body {
+      font-family: 'Source Serif 4', serif;
+      background: var(--newsprint);
+      color: var(--ink);
+    }
+
+    /* ══ MASTHEAD ══════════════════════════════════════════ */
+    .masthead {
+      border-top: 8px solid var(--black);
+      padding: 20px 40px 16px;
+      text-align: center;
+      background: var(--newsprint);
+    }
+
+    .masthead-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 9vw, 7.5rem);
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .masthead-slogan {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+      color: var(--ink);
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+
+    .masthead-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--black);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .masthead-rule span { flex: 1; text-align: center; }
+    .masthead-rule .rule-accent { color: var(--cobalt); font-weight: 600; }
+
+    .masthead-thick-rule {
+      height: 1px;
+      background: var(--black);
+      margin-top: 6px;
+    }
+    .masthead-double-rule {
+      height: 4px;
+      border-top: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+      margin-top: 2px;
+    }
+
+    /* ══ PAGE BODY ═════════════════════════════════════════ */
+    .page-body {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      min-height: calc(100vh - 160px);
+    }
+
+    /* ══ LEFT SIDEBAR ══════════════════════════════════════ */
+    .sidebar {
+      border-right: 2px solid var(--black);
+      padding: 28px 18px;
+      background: var(--newsprint);
+    }
+
+    .sidebar-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 6px;
+      margin-bottom: 0;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+    }
+
+    .sidebar nav ul li {
+      border-bottom: 1px solid rgba(0,0,0,0.18);
+    }
+
+    .sidebar nav ul li a {
+      display: block;
+      padding: 11px 0 11px 4px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.3;
+      transition: color 0.15s, padding-left 0.15s;
+    }
+
+    .sidebar nav ul li a:hover {
+      color: var(--cobalt);
+      padding-left: 10px;
+    }
+
+    .sidebar-divider {
+      height: 3px;
+      background: var(--orange);
+      margin: 28px 0 20px;
+    }
+
+    .sidebar-note {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .sidebar-cta {
+      display: block;
+      margin-top: 20px;
+      background: var(--cobalt);
+      color: #fff;
+      text-align: center;
+      padding: 11px 8px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .sidebar-cta:hover { background: #003a91; }
+
+    /* ══ MAIN CONTENT ══════════════════════════════════════ */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 176px;
+      background: var(--newsprint);
+    }
+
+    /* Lead story area */
+    .lead-story {
+      padding: 28px 28px 40px;
+      border-right: 1px solid var(--black);
+    }
+
+    .lead-kicker {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      border-bottom: 2px solid var(--cobalt);
+      display: inline-block;
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+    }
+
+    .lead-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .lead-deck {
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: #444;
+      border-top: 1px solid var(--black);
+      border-bottom: 1px solid var(--black);
+      padding: 7px 0;
+      margin-bottom: 18px;
+    }
+
+    /* ── FEMALE RUNNER FIGURE ── */
+    .runner-figure {
+      width: 100%;
+      height: 360px;
+      background: #dfd7cc;
+      border-top: 3px solid var(--black);
+      border-bottom: 1px solid var(--black);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .runner-figure svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .runner-caption {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    /* Article body — two columns newspaper style */
+    .lead-body {
+      font-size: 0.9rem;
+      line-height: 1.78;
+      text-align: justify;
+      columns: 2;
+      column-gap: 24px;
+      column-rule: 1px solid #bbb;
+    }
+
+    .lead-body p + p { margin-top: 0.75em; }
+
+    .lead-body p:first-child::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.8;
+      margin: 6px 6px 0 0;
+      color: var(--black);
+    }
+
+    /* ── RIGHT COLUMN ── */
+    .right-col {
+      padding: 28px 16px;
+    }
+
+    .pull-quote {
+      border-top: 3px solid var(--orange);
+      border-bottom: 1px solid var(--black);
+      padding: 14px 0 16px;
+      margin-bottom: 22px;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.98rem;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--black);
+    }
+
+    .right-col-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 5px;
+      margin-bottom: 14px;
+    }
+
+    .stat {
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px dotted #aaa;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--cobalt);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: #555;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    /* ══ FOOTER ════════════════════════════════════════════ */
+    footer {
+      border-top: 6px double var(--black);
+      background: var(--black);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 22px 16px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    footer strong { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- ══ MASTHEAD ══ -->
+  <header class="masthead">
+    <h1 class="masthead-title">Nicole's Run Club</h1>
+    <p class="masthead-slogan">Turning enthusiasm into endurance</p>
+    <div class="masthead-rule">
+      <span class="rule-accent">&#9670; Beginner &bull; Endurance &bull; Inspiration &#9670;</span>
+      <span>Est. 2020</span>
+    </div>
+    <div class="masthead-thick-rule"></div>
+    <div class="masthead-double-rule"></div>
+  </header>
+
+  <!-- ══ BODY: LEFT SIDEBAR + MAIN ══ -->
+  <div class="page-body">
+
+    <!-- LEFT SIDEBAR NAV -->
+    <aside class="sidebar">
+      <p class="sidebar-label">Inside This Issue</p>
+      <nav aria-label="Site navigation">
+        <ul>
+          <li><a href="about-marathon.html">About the Marathon</a></li>
+          <li><a href="#">How to Get Started</a></li>
+          <li><a href="#">My Personal Running Journey</a></li>
+          <li><a href="#">My Personal Tips &amp; Tricks</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <p class="sidebar-note">A beginner-first guide to running 26.2 miles &mdash; with honesty, humor, and hard-won miles.</p>
+      <a href="#" class="sidebar-cta">Start Your Journey &rarr;</a>
+    </aside>
+
+    <!-- MAIN + RIGHT COL -->
+    <div class="main-content">
+
+      <!-- LEAD STORY -->
+      <article class="lead-story">
+        <p class="lead-kicker">Feature Story</p>
+        <h2 class="lead-headline">The Road Is Long.<br>Run It Anyway.</h2>
+        <p class="lead-deck">How one ordinary woman decided 26.2 miles was exactly far enough &mdash; and lived to write about it.</p>
+
+        <!-- FEMALE RUNNER ILLUSTRATION -->
+        <figure class="runner-figure">
+          <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+
+            <!-- Sky gradient background -->
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#A8C8E8" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#dfd7cc"/>
+              </linearGradient>
+              <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#b8b0a4"/>
+                <stop offset="100%" stop-color="#a0988c"/>
+              </linearGradient>
+            </defs>
+
+            <rect width="700" height="360" fill="url(#skyGrad)"/>
+            <!-- Road -->
+            <rect x="0" y="285" width="700" height="75" fill="url(#roadGrad)"/>
+            <rect x="0" y="283" width="700" height="4" fill="#888"/>
+            <!-- Road marking -->
+            <rect x="60" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <rect x="160" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <rect x="260" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <rect x="460" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <rect x="560" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <rect x="630" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+
+            <!-- Distant runners (background, stylized) -->
+            <ellipse cx="120" cy="255" rx="8" ry="9" fill="#ccc" opacity="0.5"/>
+            <rect x="117" y="264" width="6" height="18" rx="2" fill="#bbb" opacity="0.5"/>
+            <ellipse cx="580" cy="250" rx="7" ry="8" fill="#ccc" opacity="0.4"/>
+            <rect x="577" y="258" width="6" height="16" rx="2" fill="#bbb" opacity="0.4"/>
+
+            <!-- ── MAIN FEMALE RUNNER (center stage) ── -->
+            <!-- Shadow -->
+            <ellipse cx="350" cy="291" rx="48" ry="8" fill="rgba(0,0,0,0.15)"/>
+
+            <!-- === BACK LEG (right leg, extended behind) === -->
+            <!-- Upper back leg -->
+            <path d="M338 228 Q328 252 320 272 Q315 284 316 290" stroke="#F0C090" stroke-width="20" stroke-linecap="round" fill="none"/>
+            <!-- Lower back leg -->
+            <path d="M316 290 Q312 302 318 310" stroke="#F0C090" stroke-width="18" stroke-linecap="round" fill="none"/>
+            <!-- Back shoe -->
+            <path d="M308 308 Q306 318 310 322 Q324 326 338 320 Q342 312 334 306 Z" fill="#1a1a1a"/>
+            <rect x="306" y="316" width="34" height="8" rx="3" fill="#333"/>
+            <path d="M308 318 Q320 315 336 319" stroke="#E85D04" stroke-width="2" fill="none"/>
+
+            <!-- === TORSO === -->
+            <!-- Orange running singlet -->
+            <path d="M316 148 Q304 154 296 185 Q298 204 310 212 L320 226 L372 226 L382 212 Q394 204 396 185 Q388 154 376 148 L346 144 Z" fill="#E85D04"/>
+            <!-- Singlet shading -->
+            <path d="M346 144 L320 148 Q310 165 310 190 L320 210 L346 210 Z" fill="rgba(0,0,0,0.08)"/>
+            <!-- Singlet neckline -->
+            <path d="M330 148 Q346 142 362 148" stroke="#C04000" stroke-width="2" fill="none"/>
+
+            <!-- Race bib -->
+            <rect x="328" y="170" width="36" height="28" rx="3" fill="#fff" stroke="#ddd" stroke-width="1"/>
+            <text x="346" y="182" text-anchor="middle" font-family="serif" font-size="9" fill="#555" letter-spacing="1">RUN</text>
+            <text x="346" y="194" text-anchor="middle" font-family="serif" font-size="13" font-weight="bold" fill="#0047AB">26</text>
+
+            <!-- === FRONT LEG (left leg, knee raised) === -->
+            <!-- Upper front leg -->
+            <path d="M356 224 Q368 248 374 266 Q378 278 374 286" stroke="#F0C090" stroke-width="22" stroke-linecap="round" fill="none"/>
+            <!-- Lower front leg -->
+            <path d="M374 286 Q372 300 376 308" stroke="#F0C090" stroke-width="19" stroke-linecap="round" fill="none"/>
+            <!-- Front shoe (raised slightly) -->
+            <path d="M366 304 Q362 316 366 322 Q380 328 396 320 Q399 311 390 304 Z" fill="#1a1a1a"/>
+            <rect x="362" y="316" width="36" height="8" rx="3" fill="#333"/>
+            <path d="M364 318 Q378 315 395 319" stroke="#E85D04" stroke-width="2" fill="none"/>
+
+            <!-- Shorts (cobalt blue, over torso bottom) -->
+            <path d="M318 220 L312 268 L336 268 L346 242 L356 268 L380 268 L374 220 Z" fill="#0047AB"/>
+            <path d="M318 220 L312 268 L336 268 L346 242 Z" fill="rgba(0,0,0,0.1)"/>
+
+            <!-- === ARMS === -->
+            <!-- Back arm (left arm, pumped back) -->
+            <path d="M318 160 Q302 168 292 182 Q286 196 288 208" stroke="#F0C090" stroke-width="16" stroke-linecap="round" fill="none"/>
+            <!-- Back hand -->
+            <ellipse cx="290" cy="210" rx="11" ry="9" fill="#F0C090"/>
+
+            <!-- Front arm (right arm, driving forward) -->
+            <path d="M374 160 Q390 170 398 185 Q404 200 400 212" stroke="#F0C090" stroke-width="16" stroke-linecap="round" fill="none"/>
+            <!-- Front hand -->
+            <ellipse cx="401" cy="214" rx="11" ry="9" fill="#F0C090"/>
+
+            <!-- === HEAD & HAIR === -->
+            <!-- Neck -->
+            <path d="M338 138 Q346 134 354 138 L356 150 Q346 154 336 150 Z" fill="#F0C090"/>
+
+            <!-- Hair base (full head, golden blonde) -->
+            <ellipse cx="346" cy="112" rx="36" ry="38" fill="#D4A520"/>
+
+            <!-- Face (on top of hair) -->
+            <ellipse cx="346" cy="116" rx="28" ry="30" fill="#F0C090"/>
+
+            <!-- Hair sides and top detail -->
+            <path d="M316 102 Q314 88 322 78 Q332 66 346 64 Q360 66 368 76 Q376 88 376 102" fill="#D4A520"/>
+
+            <!-- Ponytail flying back dynamically -->
+            <path d="M316 100 Q295 88 278 82 Q262 78 250 88 Q258 100 272 98 Q286 96 300 104 Q310 108 316 108 Z" fill="#C8981A"/>
+            <path d="M316 108 Q298 112 282 108 Q268 104 258 112 Q266 124 280 120 Q296 116 312 116 Z" fill="#D4A520"/>
+            <path d="M316 100 Q292 90 270 85" stroke="#B8860B" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+            <!-- Hair highlight -->
+            <path d="M330 70 Q346 66 360 72 Q355 68 346 66 Q338 66 330 70 Z" fill="#E8C040" opacity="0.6"/>
+
+            <!-- Eyes -->
+            <ellipse cx="336" cy="112" rx="5.5" ry="4.5" fill="#fff"/>
+            <ellipse cx="337" cy="112" rx="3.2" ry="3.2" fill="#5a3010"/>
+            <ellipse cx="338" cy="111" rx="1" ry="1" fill="#fff"/>
+            <!-- Eyelash hint -->
+            <path d="M331 109 Q336 106 341 109" stroke="#5a3010" stroke-width="1" fill="none"/>
+
+            <!-- Eyebrow -->
+            <path d="M330 106 Q336 103 342 105" stroke="#8B6914" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+            <!-- Nose -->
+            <path d="M343 118 Q346 123 350 120" stroke="#d09060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Smile -->
+            <path d="M338 128 Q346 133 354 128" stroke="#c07850" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <!-- Cheek flush -->
+            <ellipse cx="332" cy="124" rx="6" ry="4" fill="#f0a080" opacity="0.3"/>
+            <ellipse cx="360" cy="124" rx="6" ry="4" fill="#f0a080" opacity="0.3"/>
+
+            <!-- Earring (small detail) -->
+            <circle cx="318" cy="118" r="3" fill="#E85D04"/>
+
+            <!-- === MOTION LINES === -->
+            <line x1="220" y1="168" x2="258" y2="172" stroke="#aaa" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+            <line x1="215" y1="192" x2="256" y2="193" stroke="#aaa" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.6"/>
+            <line x1="218" y1="216" x2="256" y2="214" stroke="#aaa" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>
+
+            <!-- Crowd/finish line hint in distance -->
+            <rect x="580" y="220" width="4" height="60" fill="#0047AB" opacity="0.3"/>
+            <rect x="590" y="220" width="4" height="60" fill="#0047AB" opacity="0.3"/>
+            <rect x="580" y="220" width="14" height="6" fill="#E85D04" opacity="0.4"/>
+
+            <!-- Ground shadow dots (halftone newspaper feel) -->
+            <circle cx="300" cy="294" r="2" fill="rgba(0,0,0,0.1)"/>
+            <circle cx="312" cy="296" r="1.5" fill="rgba(0,0,0,0.08)"/>
+            <circle cx="390" cy="294" r="2" fill="rgba(0,0,0,0.1)"/>
+            <circle cx="402" cy="296" r="1.5" fill="rgba(0,0,0,0.08)"/>
+          </svg>
+        </figure>
+        <figcaption class="runner-caption">Illustration: A blonde female runner in full stride, race bib No. 26 &mdash; Nicole's Run Club, Est. 2024.</figcaption>
+
+        <div class="lead-body">
+          <p>Nicole's Run Club is a beginner-first space for anyone brave enough to lace up and chase the finish line. No elite times required &mdash; just the guts to start. Real training. Real talk. 26.2 real miles.</p>
+          <p>Whether you've never run a block or you're working up to your first 5K, this is the place where enthusiasm earns its miles. The marathon doesn't care where you started &mdash; only that you showed up.</p>
+        </div>
+      </article>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="right-col">
+        <div class="pull-quote">
+          <blockquote>&ldquo;The marathon doesn't care where you started &mdash; only that you showed up.&rdquo;</blockquote>
+        </div>
+
+        <p class="right-col-label">By the Numbers</p>
+        <div class="stat">
+          <div class="stat-number">26.2</div>
+          <div class="stat-label">Miles in a full marathon</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">42K</div>
+          <div class="stat-label">Reasons to start today</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">1</div>
+          <div class="stat-label">Decision that changes everything</div>
+        </div>
+      </aside>
+
+    </div><!-- /.main-content -->
+  </div><!-- /.page-body -->
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2024 <strong>Nicole's Run Club</strong> &mdash; Turning enthusiasm into endurance
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About the Marathon — Nicole's Run Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #0d0d0d;
+      --ink:        #1a1a1a;
+      --newsprint:  #f5f1e8;
+      --cobalt:     #0047AB;
+      --light-blue: #A8C8E8;
+      --orange:     #E85D04;
+    }
+
+    body {
+      font-family: 'Source Serif 4', serif;
+      background: var(--newsprint);
+      color: var(--ink);
+    }
+
+    /* ══ MASTHEAD ══ */
+    .masthead {
+      border-top: 8px solid var(--black);
+      padding: 20px 40px 16px;
+      text-align: center;
+      background: var(--newsprint);
+    }
+
+    .masthead-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 9vw, 7.5rem);
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .masthead-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .masthead-slogan {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+      color: var(--ink);
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+
+    .masthead-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--black);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      justify-content: center;
+    }
+
+    .masthead-rule .rule-accent { color: var(--cobalt); font-weight: 600; }
+
+    .masthead-thick-rule {
+      height: 1px;
+      background: var(--black);
+      margin-top: 6px;
+    }
+
+    .masthead-double-rule {
+      height: 4px;
+      border-top: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+      margin-top: 2px;
+    }
+
+    /* Section flag */
+    .section-flag {
+      background: var(--cobalt);
+      color: #fff;
+      text-align: center;
+      padding: 7px 40px;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* ══ PAGE BODY ══ */
+    .page-body {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      min-height: calc(100vh - 200px);
+    }
+
+    /* ══ LEFT SIDEBAR ══ */
+    .sidebar {
+      border-right: 2px solid var(--black);
+      padding: 28px 18px;
+      background: var(--newsprint);
+    }
+
+    .sidebar-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 6px;
+    }
+
+    .sidebar nav ul { list-style: none; }
+
+    .sidebar nav ul li { border-bottom: 1px solid rgba(0,0,0,0.18); }
+
+    .sidebar nav ul li a {
+      display: block;
+      padding: 11px 0 11px 4px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.3;
+      transition: color 0.15s, padding-left 0.15s;
+    }
+
+    .sidebar nav ul li a:hover,
+    .sidebar nav ul li a.active { color: var(--cobalt); padding-left: 10px; }
+
+    .sidebar-divider {
+      height: 3px;
+      background: var(--orange);
+      margin: 28px 0 20px;
+    }
+
+    .sidebar-note {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .sidebar-cta {
+      display: block;
+      margin-top: 20px;
+      background: var(--cobalt);
+      color: #fff;
+      text-align: center;
+      padding: 11px 8px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .sidebar-cta:hover { background: #003a91; }
+
+    /* ══ MAIN CONTENT ══ */
+    .main-content {
+      padding: 28px 32px 48px;
+    }
+
+    .lead-kicker {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      border-bottom: 2px solid var(--cobalt);
+      display: inline-block;
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+    }
+
+    .lead-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .lead-deck {
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: #444;
+      border-top: 1px solid var(--black);
+      border-bottom: 1px solid var(--black);
+      padding: 7px 0;
+      margin-bottom: 22px;
+    }
+
+    /* ── ARTICLE BODY: image floats left, facts wrap right + below ── */
+    .article-body { overflow: hidden; }
+
+    /* Hero image floats left */
+    .hero-figure {
+      float: left;
+      width: 56%;
+      margin: 0 26px 20px 0;
+      border-top: 3px solid var(--black);
+      border-bottom: 1px solid var(--black);
+    }
+
+    .hero-figure svg { display: block; width: 100%; }
+
+    .hero-caption {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: #666;
+      padding: 6px 0;
+      line-height: 1.45;
+    }
+
+    /* ── FACT BOXES ── */
+    .fact-box {
+      border-top: 3px solid var(--cobalt);
+      padding: 14px 0 14px;
+      margin-bottom: 18px;
+    }
+
+    .fact-box:nth-child(2) { border-top-color: var(--orange); }
+    .fact-box:nth-child(3) { border-top-color: var(--black); }
+
+    .fact-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .fact-year.highlight { color: var(--cobalt); }
+    .fact-year.orange    { color: var(--orange); }
+
+    .fact-rule {
+      height: 1px;
+      background: var(--black);
+      margin: 6px 0 8px;
+      width: 40px;
+    }
+
+    .fact-text {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    /* ── BELOW-IMAGE TIMELINE ROW (1972 + Today) ── */
+    .timeline-row {
+      clear: both;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 4px double var(--black);
+      margin-top: 12px;
+    }
+
+    .timeline-item {
+      padding: 22px 24px 22px 0;
+      border-right: 1px solid var(--black);
+    }
+
+    .timeline-item:last-child {
+      border-right: none;
+      padding-left: 24px;
+      padding-right: 0;
+    }
+
+    .timeline-item .fact-year { font-size: 2.6rem; }
+
+    .timeline-item .fact-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    /* Intro paragraph below deck, before image */
+    .intro-graf {
+      font-size: 0.92rem;
+      line-height: 1.78;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .intro-graf::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.8;
+      margin: 6px 6px 0 0;
+      color: var(--black);
+    }
+
+    /* ══ FOOTER ══ */
+    footer {
+      border-top: 6px double var(--black);
+      background: var(--black);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 22px 16px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    footer strong { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- ══ MASTHEAD ══ -->
+  <header class="masthead">
+    <h1 class="masthead-title"><a href="index.html">Nicole's Run Club</a></h1>
+    <p class="masthead-slogan">Turning enthusiasm into endurance</p>
+    <div class="masthead-rule">
+      <span class="rule-accent">&#9670; Beginner &bull; Endurance &bull; Inspiration &#9670;</span>
+      <span>Est. 2020</span>
+    </div>
+    <div class="masthead-thick-rule"></div>
+    <div class="masthead-double-rule"></div>
+  </header>
+
+  <!-- Section flag -->
+  <div class="section-flag">About the Marathon</div>
+
+  <!-- ══ BODY ══ -->
+  <div class="page-body">
+
+    <!-- LEFT SIDEBAR NAV -->
+    <aside class="sidebar">
+      <p class="sidebar-label">Inside This Issue</p>
+      <nav aria-label="Site navigation">
+        <ul>
+          <li><a href="about-marathon.html" class="active">About the Marathon</a></li>
+          <li><a href="#">How to Get Started</a></li>
+          <li><a href="#">My Personal Running Journey</a></li>
+          <li><a href="#">My Personal Tips &amp; Tricks</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <p class="sidebar-note">A beginner-first guide to running 26.2 miles &mdash; with honesty, humor, and hard-won miles.</p>
+      <a href="index.html" class="sidebar-cta">&larr; Back to Home</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <p class="lead-kicker">History &bull; Origins &bull; Legacy</p>
+      <h2 class="lead-headline">From a Battlefield Messenger<br>to a Global Movement</h2>
+      <p class="lead-deck">The marathon's 2,500-year journey &mdash; from a desperate run across ancient Greece to the world's most beloved endurance race.</p>
+
+      <div class="article-body">
+
+        <!-- HERO IMAGE: Ancient Greece illustration, floated left -->
+        <figure class="hero-figure">
+          <svg viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="ancientSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6BAED6"/>
+                <stop offset="55%" stop-color="#C8D8E8"/>
+                <stop offset="100%" stop-color="#E8D8A0"/>
+              </linearGradient>
+              <linearGradient id="ancientGround" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#C8A850"/>
+                <stop offset="100%" stop-color="#A08030"/>
+              </linearGradient>
+              <linearGradient id="marbleCol" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#E8E0C4"/>
+                <stop offset="50%" stop-color="#F0EAD2"/>
+                <stop offset="100%" stop-color="#DDD5B8"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Sky & ground -->
+            <rect width="520" height="400" fill="url(#ancientSky)"/>
+            <!-- Distant hills -->
+            <path d="M0 220 Q80 180 160 200 Q240 185 320 195 Q400 180 520 205 L520 400 L0 400 Z" fill="#7A9E6A" opacity="0.45"/>
+            <path d="M0 240 Q120 210 260 228 Q380 210 520 230 L520 400 L0 400 Z" fill="#8AB078" opacity="0.35"/>
+            <!-- Ground -->
+            <rect x="0" y="295" width="520" height="105" fill="url(#ancientGround)"/>
+            <!-- Track / road surface -->
+            <path d="M0 303 Q260 298 520 303" stroke="#A89040" stroke-width="2" fill="none"/>
+            <!-- Ground texture lines -->
+            <path d="M0 320 Q130 316 260 318 Q390 316 520 320" stroke="#907828" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <path d="M0 340 Q130 337 260 338 Q390 337 520 340" stroke="#907828" stroke-width="0.6" fill="none" opacity="0.4"/>
+
+            <!-- Sun -->
+            <circle cx="450" cy="65" r="32" fill="#F8CE50" opacity="0.9"/>
+            <circle cx="450" cy="65" r="24" fill="#FADC70"/>
+            <line x1="450" y1="25" x2="450" y2="17" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
+            <line x1="480" y1="36" x2="486" y2="30" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
+            <line x1="490" y1="65" x2="498" y2="65" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
+            <line x1="480" y1="94" x2="486" y2="100" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
+            <line x1="420" y1="36" x2="414" y2="30" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
+            <line x1="410" y1="65" x2="402" y2="65" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
+
+            <!-- ── DORIC COLUMNS (left background) ── -->
+            <!-- Column 1 -->
+            <rect x="22" y="100" width="42" height="200" fill="url(#marbleCol)" rx="2"/>
+            <!-- Flutes col 1 -->
+            <line x1="30" y1="100" x2="30" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
+            <line x1="38" y1="100" x2="38" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
+            <line x1="46" y1="100" x2="46" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
+            <line x1="54" y1="100" x2="54" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
+            <!-- Echinus (capital) col 1 -->
+            <path d="M18 100 Q22 90 43 88 Q64 90 68 100 Z" fill="#DDD5B4"/>
+            <!-- Abacus col 1 -->
+            <rect x="14" y="82" width="58" height="10" fill="#D4CCA8"/>
+            <!-- Base col 1 -->
+            <rect x="18" y="298" width="50" height="8" fill="#DDD5B4"/>
+            <rect x="14" y="304" width="58" height="6" fill="#D4CCA8"/>
+
+            <!-- Column 2 -->
+            <rect x="82" y="110" width="38" height="190" fill="#E4DCC0" rx="2"/>
+            <line x1="89" y1="110" x2="89" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
+            <line x1="96" y1="110" x2="96" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
+            <line x1="103" y1="110" x2="103" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
+            <line x1="110" y1="110" x2="110" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
+            <path d="M78 110 Q82 100 101 98 Q120 100 124 110 Z" fill="#D8D0B0"/>
+            <rect x="74" y="92" width="54" height="10" fill="#D0C8A0"/>
+            <rect x="78" y="298" width="46" height="7" fill="#D8D0B0"/>
+            <rect x="74" y="303" width="54" height="6" fill="#D0C8A0"/>
+
+            <!-- Entablature connecting columns -->
+            <rect x="14" y="72" width="120" height="13" fill="#D0C8A0"/>
+            <rect x="14" y="60" width="120" height="14" fill="#C8C0A0"/>
+            <!-- Meander frieze pattern -->
+            <path d="M20 66 L28 66 L28 72 L36 72 L36 66 L44 66 L44 76 L28 76" stroke="#A09050" stroke-width="1.2" fill="none"/>
+            <path d="M52 66 L60 66 L60 72 L68 72 L68 66 L76 66 L76 76 L60 76" stroke="#A09050" stroke-width="1.2" fill="none"/>
+            <path d="M84 66 L92 66 L92 72 L100 72 L100 66 L108 66 L108 76 L92 76" stroke="#A09050" stroke-width="1.2" fill="none"/>
+            <!-- Pediment triangle -->
+            <path d="M14 60 L74 30 L134 60 Z" fill="#C8C0A0" stroke="#B0A888" stroke-width="1"/>
+            <!-- Pediment acroteria -->
+            <circle cx="14" cy="60" r="4" fill="#C8C0A0"/>
+            <circle cx="74" cy="30" r="5" fill="#D0C8A0"/>
+            <circle cx="134" cy="60" r="4" fill="#C8C0A0"/>
+
+            <!-- ── OLIVE TREE (right background) ── -->
+            <rect x="418" y="238" width="11" height="64" fill="#7A5C2A" rx="3"/>
+            <ellipse cx="424" cy="228" rx="38" ry="32" fill="#4A7A28"/>
+            <ellipse cx="406" cy="238" rx="24" ry="20" fill="#3D6A22"/>
+            <ellipse cx="442" cy="236" rx="22" ry="18" fill="#507C2A"/>
+            <ellipse cx="424" cy="210" rx="18" ry="14" fill="#4A7828"/>
+            <!-- Olive fruits -->
+            <ellipse cx="412" cy="226" rx="4" ry="3" fill="#2A5018"/>
+            <ellipse cx="432" cy="220" rx="3.5" ry="2.5" fill="#2A5018"/>
+            <ellipse cx="445" cy="232" rx="3.5" ry="2.5" fill="#2A5018"/>
+            <ellipse cx="400" cy="244" rx="3" ry="2.5" fill="#2A5018"/>
+            <!-- Silver-green leaf highlights -->
+            <path d="M415 215 Q420 210 428 215" stroke="#7AB040" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <path d="M432 225 Q438 220 444 226" stroke="#7AB040" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+            <!-- ── MAIN GREEK RUNNER ── -->
+            <!-- Shadow -->
+            <ellipse cx="270" cy="302" rx="46" ry="8" fill="rgba(0,0,0,0.18)"/>
+
+            <!-- Back leg (extended behind) -->
+            <path d="M260 248 Q250 268 242 286 Q238 297 240 303" stroke="#C49060" stroke-width="19" stroke-linecap="round" fill="none"/>
+            <path d="M240 303 Q238 313 242 319" stroke="#C49060" stroke-width="17" stroke-linecap="round" fill="none"/>
+            <!-- Back sandal -->
+            <path d="M232 316 Q228 326 232 333 Q246 338 260 330 Q263 322 254 316 Z" fill="#8B6020"/>
+            <path d="M232 322 Q244 317 260 322" stroke="#6B4010" stroke-width="2" fill="none"/>
+            <path d="M242 316 L248 308" stroke="#6B4010" stroke-width="1.5" fill="none"/>
+            <path d="M252 316 L258 308" stroke="#6B4010" stroke-width="1.5" fill="none"/>
+
+            <!-- Chiton (white/cream running garment) -->
+            <path d="M248 190 Q236 198 228 228 Q230 248 242 255 L248 268 L290 268 L296 255 Q308 248 310 228 Q302 198 290 190 L270 186 Z" fill="#F2EBD5"/>
+            <!-- Chiton folds/pleats -->
+            <path d="M250 192 Q242 215 242 248" stroke="#E0D4B5" stroke-width="1.8" fill="none"/>
+            <path d="M268 186 L268 268" stroke="#E0D4B5" stroke-width="1.5" fill="none"/>
+            <path d="M286 192 Q294 215 294 248" stroke="#E0D4B5" stroke-width="1.8" fill="none"/>
+            <!-- Chiton hem & border (golden) -->
+            <path d="M228 230 Q234 252 242 258 L248 270 L290 270 L296 258 Q304 252 310 230" stroke="#C8A040" stroke-width="2.5" fill="none"/>
+            <!-- Belt -->
+            <path d="M235 218 Q268 212 302 218" stroke="#C8A040" stroke-width="3" fill="none"/>
+
+            <!-- Front leg (raised, dynamic) -->
+            <path d="M282 264 Q294 285 300 302 Q305 315 300 323" stroke="#C49060" stroke-width="21" stroke-linecap="round" fill="none"/>
+            <path d="M300 323 Q299 333 304 339" stroke="#C49060" stroke-width="18" stroke-linecap="round" fill="none"/>
+            <!-- Front sandal -->
+            <path d="M294 335 Q290 346 294 352 Q308 357 324 349 Q326 341 318 334 Z" fill="#8B6020"/>
+            <path d="M294 341 Q308 336 323 341" stroke="#6B4010" stroke-width="2" fill="none"/>
+            <path d="M304 335 L310 326" stroke="#6B4010" stroke-width="1.5" fill="none"/>
+            <path d="M314 335 L320 326" stroke="#6B4010" stroke-width="1.5" fill="none"/>
+
+            <!-- Back arm (pumped back) -->
+            <path d="M252 202 Q234 212 224 228 Q218 242 220 252" stroke="#C49060" stroke-width="15" stroke-linecap="round" fill="none"/>
+            <ellipse cx="220" cy="254" rx="11" ry="9" fill="#C49060"/>
+
+            <!-- Front arm (driving forward) -->
+            <path d="M288 202 Q306 214 314 230 Q318 244 315 254" stroke="#C49060" stroke-width="15" stroke-linecap="round" fill="none"/>
+            <ellipse cx="316" cy="256" rx="11" ry="9" fill="#C49060"/>
+
+            <!-- Neck -->
+            <path d="M261 178 Q270 174 278 178 L280 192 Q270 196 260 192 Z" fill="#C49060"/>
+
+            <!-- Head -->
+            <ellipse cx="270" cy="162" rx="28" ry="30" fill="#C49060"/>
+
+            <!-- Dark curly hair -->
+            <path d="M244 152 Q246 130 258 120 Q270 110 282 120 Q294 130 296 152" fill="#221408"/>
+            <path d="M244 153 Q240 135 248 122 Q254 115 264 113" fill="#221408"/>
+            <path d="M296 153 Q300 135 292 122 Q286 115 276 113" fill="#221408"/>
+            <!-- Hair curl texture -->
+            <path d="M246 150 Q242 140 248 133 Q254 127 260 133" stroke="#150C04" stroke-width="1.5" fill="none"/>
+            <path d="M294 150 Q298 140 292 133 Q286 127 280 133" stroke="#150C04" stroke-width="1.5" fill="none"/>
+            <path d="M258 116 Q270 110 282 116" stroke="#150C04" stroke-width="1.5" fill="none"/>
+
+            <!-- Face features -->
+            <ellipse cx="278" cy="158" rx="5.5" ry="4.5" fill="#fff"/>
+            <ellipse cx="279" cy="158" rx="3.2" ry="3.2" fill="#3A1808"/>
+            <ellipse cx="280" cy="157" rx="1.1" ry="1.1" fill="#fff"/>
+            <!-- Brow -->
+            <path d="M272 150 Q278 147 284 149" stroke="#5A3010" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <!-- Nose -->
+            <path d="M275 163 Q278 168 283 165" stroke="#A06840" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Mouth -->
+            <path d="M268 175 Q274 179 281 176" stroke="#A06840" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <!-- Greek beard -->
+            <path d="M248 162 Q252 172 260 178 Q270 182 280 178 Q288 174 292 164" stroke="#2A1408" stroke-width="2" fill="none"/>
+            <path d="M250 164 Q256 174 268 180" stroke="#1A0C04" stroke-width="1" fill="none" opacity="0.5"/>
+            <path d="M290 164 Q284 174 272 180" stroke="#1A0C04" stroke-width="1" fill="none" opacity="0.5"/>
+
+            <!-- Laurel wreath -->
+            <path d="M244 150 Q250 136 262 128 Q270 124 278 126 Q286 128 292 138 Q298 148 296 156" stroke="#3A6A10" stroke-width="3" fill="none"/>
+            <!-- Wreath leaves (pairs) -->
+            <ellipse cx="248" cy="146" rx="7" ry="4.5" fill="#4A7A18" transform="rotate(-25 248 146)"/>
+            <ellipse cx="256" cy="136" rx="7" ry="4.5" fill="#5A8A22" transform="rotate(-45 256 136)"/>
+            <ellipse cx="268" cy="126" rx="7" ry="4.5" fill="#4A7A18" transform="rotate(-10 268 126)"/>
+            <ellipse cx="282" cy="127" rx="7" ry="4.5" fill="#5A8A22" transform="rotate(15 282 127)"/>
+            <ellipse cx="292" cy="136" rx="7" ry="4.5" fill="#4A7A18" transform="rotate(35 292 136)"/>
+            <ellipse cx="298" cy="150" rx="6" ry="4" fill="#5A8A22" transform="rotate(50 298 150)"/>
+            <!-- Wreath berries -->
+            <circle cx="262" cy="130" r="2.5" fill="#8B0000" opacity="0.7"/>
+            <circle cx="278" cy="124" r="2.5" fill="#8B0000" opacity="0.7"/>
+            <circle cx="290" cy="132" r="2.5" fill="#8B0000" opacity="0.7"/>
+
+            <!-- Motion lines (speed) -->
+            <line x1="158" y1="210" x2="196" y2="214" stroke="#C8B870" stroke-width="1.8" stroke-dasharray="5,4" opacity="0.65"/>
+            <line x1="153" y1="232" x2="192" y2="234" stroke="#C8B870" stroke-width="1.4" stroke-dasharray="4,4" opacity="0.55"/>
+            <line x1="156" y1="254" x2="192" y2="252" stroke="#C8B870" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.45"/>
+
+            <!-- Distant Athens / city suggestion -->
+            <rect x="340" y="198" width="12" height="42" fill="#D8D0B8" opacity="0.5"/>
+            <path d="M336 198 L346 186 L356 198 Z" fill="#D0C8B0" opacity="0.5"/>
+            <rect x="358" y="206" width="10" height="34" fill="#D0C8B0" opacity="0.4"/>
+            <path d="M354 206 L363 196 L372 206 Z" fill="#C8C0A8" opacity="0.4"/>
+
+            <!-- Dust particles under feet -->
+            <circle cx="240" cy="306" r="3" fill="#C8A840" opacity="0.3"/>
+            <circle cx="252" cy="309" r="2" fill="#C8A840" opacity="0.25"/>
+            <circle cx="228" cy="308" r="2.5" fill="#C8A840" opacity="0.2"/>
+          </svg>
+          <p class="hero-caption">Illustration: Pheidippides, the legendary Greek messenger, races from Marathon to Athens &mdash; 490 BC.</p>
+        </figure>
+
+        <!-- FACTS flowing right of and below the image -->
+
+        <!-- Fact 1: 490 BC -->
+        <div class="fact-box">
+          <div class="fact-year highlight">490 BC</div>
+          <div class="fact-rule"></div>
+          <p class="fact-text">Pheidippides, an Athenian herald, runs approximately 25 miles from the battlefield of Marathon to Athens to announce the Greek victory over Persia. According to legend, he delivered the message <em>"Nike!"</em> (victory) and collapsed. The myth of the marathon was born.</p>
+        </div>
+
+        <!-- Fact 2: 1896 -->
+        <div class="fact-box">
+          <div class="fact-year orange">1896</div>
+          <div class="fact-rule"></div>
+          <p class="fact-text">The first modern Olympic Games are held in Athens, Greece. Inspired by the legend of Pheidippides, a long-distance race is included &mdash; the original Olympic Marathon. Greek water-carrier Spyridon Louis wins in 2:58:50, becoming a national hero.</p>
+        </div>
+
+        <!-- Fact 3: 1908 -->
+        <div class="fact-box">
+          <div class="fact-year">1908</div>
+          <div class="fact-rule"></div>
+          <p class="fact-text">At the London Olympics, the race distance is set at exactly 26 miles 385 yards &mdash; or 26.2 miles &mdash; so the course can start beneath the Royal Family's nursery window at Windsor Castle and finish in front of the Royal Box at Olympic Stadium. The distance sticks forever.</p>
+        </div>
+
+        <!-- TIMELINE ROW: clears float, full-width below image -->
+        <div class="timeline-row">
+
+          <div class="timeline-item">
+            <div class="fact-year highlight" style="font-size:2.6rem;">1972</div>
+            <div class="fact-rule"></div>
+            <p class="fact-text">After decades of exclusion, women are officially permitted to race in Olympic Marathon competition. The fight was long &mdash; in 1967, Kathrine Switzer famously ran the Boston Marathon under the name "K.V. Switzer" after officials tried to physically remove her from the course. Her courage changed the sport.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="fact-year orange" style="font-size:2.6rem;">Today</div>
+            <div class="fact-rule"></div>
+            <p class="fact-text">Marathon running has exploded into a global movement. Over <strong>1 million runners</strong> cross marathon finish lines every year across the world &mdash; from New York and London to Tokyo and Berlin. What began as a single desperate run now unites people of every age, background, and pace. Including us.</p>
+          </div>
+
+        </div><!-- /.timeline-row -->
+
+      </div><!-- /.article-body -->
+    </main>
+
+  </div><!-- /.page-body -->
+
+  <footer>
+    &copy; 2020 <strong>Nicole's Run Club</strong> &mdash; Turning enthusiasm into endurance
+  </footer>
+
+</body>
+</html>
