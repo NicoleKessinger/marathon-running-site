@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Personal Tips &amp; Tricks — Nicole's Run Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #0d0d0d;
+      --ink:        #1a1a1a;
+      --newsprint:  #f5f1e8;
+      --cobalt:     #0047AB;
+      --light-blue: #A8C8E8;
+      --orange:     #E85D04;
+      --gold:       #B8860B;
+    }
+
+    body {
+      font-family: 'Source Serif 4', serif;
+      background: var(--newsprint);
+      color: var(--ink);
+    }
+
+    /* ══ MASTHEAD ══ */
+    .masthead {
+      border-top: 8px solid var(--black);
+      padding: 20px 40px 16px;
+      text-align: center;
+      background: var(--newsprint);
+    }
+    .masthead-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 9vw, 7.5rem);
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .masthead-title a { color: inherit; text-decoration: none; }
+    .masthead-slogan {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+      color: var(--ink);
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+    .masthead-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--black);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .masthead-rule .rule-accent { color: var(--cobalt); font-weight: 600; }
+    .masthead-thick-rule { height: 1px; background: var(--black); margin-top: 6px; }
+    .masthead-double-rule { height: 4px; border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); margin-top: 2px; }
+
+    .section-flag {
+      background: var(--black);
+      color: var(--newsprint);
+      text-align: center;
+      padding: 7px 40px;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* ══ PAGE BODY ══ */
+    .page-body {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      min-height: calc(100vh - 200px);
+    }
+
+    /* ══ SIDEBAR ══ */
+    .sidebar {
+      border-right: 2px solid var(--black);
+      padding: 28px 18px;
+      background: var(--newsprint);
+    }
+    .sidebar-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 6px;
+    }
+    .sidebar nav ul { list-style: none; }
+    .sidebar nav ul li { border-bottom: 1px solid rgba(0,0,0,0.18); }
+    .sidebar nav ul li a {
+      display: block;
+      padding: 11px 0 11px 4px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.3;
+      transition: color 0.15s, padding-left 0.15s;
+    }
+    .sidebar nav ul li a:hover,
+    .sidebar nav ul li a.active { color: var(--cobalt); padding-left: 10px; }
+    .sidebar-divider { height: 3px; background: var(--orange); margin: 28px 0 20px; }
+    .sidebar-note { font-size: 0.72rem; font-style: italic; color: #666; line-height: 1.55; }
+    .sidebar-cta {
+      display: block;
+      margin-top: 20px;
+      background: var(--cobalt);
+      color: #fff;
+      text-align: center;
+      padding: 11px 8px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .sidebar-cta:hover { background: #003a91; }
+
+    /* ══ MAIN CONTENT ══ */
+    .main-content { padding: 28px 32px 52px; }
+
+    .lead-kicker {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      border-bottom: 2px solid var(--cobalt);
+      display: inline-block;
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+    }
+    .lead-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+    .lead-deck {
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: #444;
+      border-top: 1px solid var(--black);
+      border-bottom: 1px solid var(--black);
+      padding: 7px 0;
+      margin-bottom: 22px;
+    }
+
+    /* ── ARTICLE INTRO (image + opening copy) ── */
+    .article-intro { overflow: hidden; margin-bottom: 0; }
+
+    /* Shoe illustration floats RIGHT */
+    .gear-figure {
+      float: right;
+      width: 50%;
+      margin: 0 0 20px 26px;
+      border-top: 3px solid var(--black);
+      border-bottom: 1px solid var(--black);
+    }
+    .gear-figure svg { display: block; width: 100%; }
+    .gear-caption {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: #666;
+      padding: 6px 0;
+      line-height: 1.45;
+    }
+
+    .opening-graf {
+      font-size: 0.92rem;
+      line-height: 1.78;
+      text-align: justify;
+      margin-bottom: 14px;
+    }
+    .opening-graf::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.8;
+      margin: 6px 7px 0 0;
+      color: var(--black);
+    }
+    .body-graf {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      text-align: justify;
+      margin-bottom: 14px;
+    }
+
+    .editors-note {
+      border-left: 4px solid var(--orange);
+      padding: 10px 16px;
+      margin: 16px 0;
+      background: rgba(232,93,4,0.05);
+    }
+    .editors-note p {
+      font-size: 0.84rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: #555;
+    }
+    .editors-note strong { color: var(--orange); font-style: normal; }
+
+    /* ══ SECTION DIVIDERS ══ */
+    .content-section { clear: both; margin-top: 32px; }
+
+    .section-head {
+      border-top: 4px solid var(--black);
+      border-bottom: 1px solid var(--black);
+      padding: 8px 0;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .section-head h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--black);
+    }
+    .section-head .section-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: rgba(0,0,0,0.1);
+      line-height: 1;
+    }
+    .section-head .section-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      margin-left: auto;
+    }
+
+    /* ── SHOE PRODUCT CARDS ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 4px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-top: 3px solid var(--cobalt);
+      padding: 16px 14px 14px;
+    }
+    .product-card:nth-child(2) { border-top-color: var(--orange); }
+    .product-card:nth-child(3) { border-top-color: var(--black); }
+    .product-card:nth-child(4) { border-top-color: var(--gold); }
+    .product-card:nth-child(5) { border-top-color: var(--cobalt); }
+
+    .product-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cobalt);
+      margin-bottom: 5px;
+    }
+    .product-card:nth-child(2) .product-tag { color: var(--orange); }
+    .product-card:nth-child(3) .product-tag { color: var(--black); }
+    .product-card:nth-child(4) .product-tag { color: var(--gold); }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 5px;
+      line-height: 1.2;
+    }
+    .product-brand {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: #777;
+      margin-bottom: 8px;
+    }
+    .product-note {
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: var(--ink);
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 8px;
+    }
+    .product-pick {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 2px 7px;
+      margin-bottom: 6px;
+    }
+
+    .shoe-footnote {
+      font-size: 0.75rem;
+      font-style: italic;
+      color: #666;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      padding-top: 10px;
+      margin-top: 10px;
+      line-height: 1.55;
+    }
+
+    /* ── NUTRITION GRID ── */
+    .nutrition-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 12px;
+    }
+
+    .gel-card {
+      border-top: 3px solid var(--cobalt);
+      padding: 14px;
+      background: #fff;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .gel-card:nth-child(even) { border-top-color: var(--orange); }
+    .gel-card:nth-child(3)    { border-top-color: var(--black); }
+    .gel-card:nth-child(4)    { border-top-color: var(--gold); }
+
+    .gel-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+    }
+    .gel-body {}
+    .gel-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+    .gel-type {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cobalt);
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .gel-card:nth-child(even) .gel-type { color: var(--orange); }
+    .gel-note {
+      font-size: 0.78rem;
+      line-height: 1.58;
+      color: var(--ink);
+    }
+
+    .fuel-rule {
+      background: var(--cobalt);
+      color: #fff;
+      padding: 16px 22px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: center;
+      margin: 14px 0 0;
+    }
+    .fuel-rule-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.2);
+      line-height: 1;
+    }
+    .fuel-rule-text h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .fuel-rule-text p {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.88);
+    }
+
+    /* ── HACKS ── */
+    .hacks-columns {
+      columns: 2;
+      column-gap: 28px;
+      column-rule: 1px solid #ccc;
+    }
+
+    .hack-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      break-inside: avoid;
+      align-items: flex-start;
+    }
+    .hack-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .hack-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 32px;
+      text-align: right;
+      color: var(--cobalt);
+    }
+    .hack-num.orange { color: var(--orange); }
+    .hack-num.gold   { color: var(--gold); }
+
+    .hack-body {}
+    .hack-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.92rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .hack-text {
+      font-size: 0.83rem;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    /* ── RACE DAY CHECKLIST ── */
+    .checklist-banner {
+      border-top: 4px double var(--black);
+      margin-top: 32px;
+      padding-top: 20px;
+    }
+    .checklist-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--orange);
+      border-bottom: 2px solid var(--orange);
+      display: inline-block;
+      padding-bottom: 3px;
+      margin-bottom: 14px;
+    }
+    .checklist-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 14px;
+    }
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .check-group {
+      background: #fff;
+      padding: 14px 14px 16px;
+      border-top: 3px solid var(--black);
+    }
+    .check-group:nth-child(2) { border-top-color: var(--cobalt); }
+    .check-group:nth-child(3) { border-top-color: var(--orange); }
+    .check-group:nth-child(4) { border-top-color: var(--gold); }
+
+    .check-group-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 10px;
+      color: var(--black);
+    }
+    .check-list { list-style: none; }
+    .check-list li {
+      font-size: 0.78rem;
+      line-height: 1.5;
+      padding: 3px 0;
+      border-bottom: 1px dotted rgba(0,0,0,0.12);
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .check-list li::before {
+      content: '□';
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      color: var(--cobalt);
+    }
+    .check-list li.warning::before { content: '⚠'; color: var(--orange); font-size: 0.7rem; }
+
+    /* ══ FOOTER ══ */
+    footer {
+      border-top: 6px double var(--black);
+      background: var(--black);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 22px 16px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    footer strong { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- ══ MASTHEAD ══ -->
+  <header class="masthead">
+    <h1 class="masthead-title"><a href="index.html">Nicole's Run Club</a></h1>
+    <p class="masthead-slogan">Turning enthusiasm into endurance</p>
+    <div class="masthead-rule">
+      <span class="rule-accent">&#9670; Beginner &bull; Endurance &bull; Inspiration &#9670;</span>
+      <span>Est. 2020</span>
+    </div>
+    <div class="masthead-thick-rule"></div>
+    <div class="masthead-double-rule"></div>
+  </header>
+
+  <div class="section-flag">My Personal Tips &amp; Tricks</div>
+
+  <div class="page-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <p class="sidebar-label">Inside This Issue</p>
+      <nav aria-label="Site navigation">
+        <ul>
+          <li><a href="about-marathon.html">About the Marathon</a></li>
+          <li><a href="how-to-start.html">How to Get Started</a></li>
+          <li><a href="my-journey.html">My Personal Running Journey</a></li>
+          <li><a href="tips-and-tricks.html" class="active">My Personal Tips &amp; Tricks</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <p class="sidebar-note">A beginner-first guide to running 26.2 miles &mdash; with honesty, humor, and hard-won miles.</p>
+      <a href="index.html" class="sidebar-cta">&larr; Back to Home</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <p class="lead-kicker">Gear &bull; Nutrition &bull; Field-Tested Hacks</p>
+      <h2 class="lead-headline">What I Wish Someone<br>Had Told Me at Mile One</h2>
+      <p class="lead-deck">Everything I've learned across four marathons about shoes, fuel, and the small tricks that make the difference between surviving and finishing strong.</p>
+
+      <!-- ARTICLE INTRO -->
+      <div class="article-intro">
+
+        <!-- SHOE ILLUSTRATION — floated right -->
+        <figure class="gear-figure">
+          <svg viewBox="0 0 540 290" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="shoeGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f5f1e8"/>
+                <stop offset="100%" stop-color="#e8e4d8"/>
+              </linearGradient>
+              <pattern id="dotgrid" width="18" height="18" patternUnits="userSpaceOnUse">
+                <circle cx="9" cy="9" r="0.9" fill="rgba(0,0,0,0.07)"/>
+              </pattern>
+            </defs>
+
+            <!-- Background -->
+            <rect width="540" height="290" fill="url(#shoeGrad)"/>
+            <rect width="540" height="290" fill="url(#dotgrid)"/>
+
+            <!-- DROP SHADOW -->
+            <ellipse cx="275" cy="264" rx="195" ry="11" fill="rgba(0,0,0,0.12)"/>
+
+            <!-- ── RUNNING SHOE — side profile, toe facing right ── -->
+
+            <!-- OUTSOLE (rubber bottom, darkest layer) -->
+            <path d="M72 242 Q110 256 220 258 Q350 260 455 250 Q482 244 486 230 Q484 218 470 212 L460 208 Q350 204 220 204 Q118 204 84 210 Q62 218 62 232 Z" fill="#222"/>
+            <!-- Outsole tread grooves -->
+            <line x1="130" y1="253" x2="130" y2="244" stroke="#383838" stroke-width="3"/>
+            <line x1="175" y1="256" x2="175" y2="247" stroke="#383838" stroke-width="3"/>
+            <line x1="220" y1="257" x2="220" y2="248" stroke="#383838" stroke-width="3"/>
+            <line x1="265" y1="258" x2="265" y2="249" stroke="#383838" stroke-width="3"/>
+            <line x1="310" y1="257" x2="310" y2="249" stroke="#383838" stroke-width="3"/>
+            <line x1="355" y1="256" x2="355" y2="247" stroke="#383838" stroke-width="3"/>
+            <line x1="400" y1="254" x2="400" y2="245" stroke="#383838" stroke-width="3"/>
+            <line x1="440" y1="250" x2="440" y2="242" stroke="#383838" stroke-width="3"/>
+
+            <!-- MIDSOLE (cushioned foam, thick layer) -->
+            <path d="M76 234 Q112 246 225 248 Q352 250 456 240 Q480 234 482 222 Q480 210 464 206 L78 206 Q60 214 62 226 Z" fill="#EEEAE2"/>
+            <!-- Midsole detail line -->
+            <path d="M80 226 Q220 218 420 224" stroke="#D8D4CC" stroke-width="1.5" fill="none"/>
+            <!-- Cobalt midsole stripe -->
+            <path d="M88 230 Q220 222 440 228" stroke="#0047AB" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.65"/>
+
+            <!-- HEEL COUNTER (stiff rear structure) -->
+            <path d="M418 110 Q452 116 470 140 Q486 166 482 200 Q480 212 466 218 L444 220 Q426 218 418 208 Q414 192 412 166 Q410 136 418 110 Z" fill="#D4CEC4"/>
+            <path d="M420 112 Q450 120 466 144 Q480 168 476 200" stroke="#C4BEB4" stroke-width="1.2" fill="none"/>
+            <!-- Orange heel accent -->
+            <path d="M456 134 Q474 158 470 196 Q462 200 454 198 Q444 195 440 180 Q436 160 442 138 Z" fill="#E85D04" opacity="0.75"/>
+            <!-- Heel logo detail -->
+            <path d="M447 152 Q456 162 454 180" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- MAIN UPPER (mesh fabric body) -->
+            <path d="M102 196 Q94 166 104 138 Q120 110 164 96 Q215 82 300 80 Q372 80 410 106 Q430 122 426 152 Q422 178 420 200 L300 200 Q200 200 138 198 Z" fill="#F0ECE8"/>
+            <!-- Upper overlay panels -->
+            <path d="M200 100 Q290 90 370 104 Q400 114 410 134 L406 180 Q360 178 290 178 Q230 178 196 182 Q170 142 175 114 Z" fill="#E8E4DC" opacity="0.6"/>
+            <!-- Mesh texture lines (horizontal) -->
+            <path d="M148 142 Q240 135 370 140 Q400 141 420 145" stroke="rgba(0,0,0,0.07)" stroke-width="1" fill="none"/>
+            <path d="M140 156 Q240 149 375 154 Q405 155 422 159" stroke="rgba(0,0,0,0.07)" stroke-width="1" fill="none"/>
+            <path d="M138 170 Q240 163 378 168 Q408 169 422 173" stroke="rgba(0,0,0,0.07)" stroke-width="1" fill="none"/>
+            <path d="M150 128 Q245 121 365 126 Q396 127 418 131" stroke="rgba(0,0,0,0.06)" stroke-width="1" fill="none"/>
+            <!-- Mesh texture lines (diagonal) -->
+            <path d="M200 100 Q195 140 196 182" stroke="rgba(0,0,0,0.06)" stroke-width="1" fill="none"/>
+            <path d="M265 88 Q262 130 262 182" stroke="rgba(0,0,0,0.05)" stroke-width="1" fill="none"/>
+            <path d="M330 86 Q328 128 328 180" stroke="rgba(0,0,0,0.05)" stroke-width="1" fill="none"/>
+
+            <!-- TONGUE (flap under laces) -->
+            <path d="M162 100 Q176 92 194 90 L196 198 L158 198 Z" fill="#E4E0D8"/>
+            <path d="M166 104 Q178 96 194 94" stroke="#D4D0C8" stroke-width="1" fill="none"/>
+
+            <!-- LACES (cobalt blue) -->
+            <path d="M174 118 Q210 113 246 117" stroke="#0047AB" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M171 131 Q208 125 248 130" stroke="#0047AB" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M170 144 Q208 138 248 143" stroke="#0047AB" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M170 157 Q208 151 248 156" stroke="#0047AB" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M171 170 Q208 164 247 169" stroke="#0047AB" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M172 183 Q207 178 246 182" stroke="#0047AB" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <!-- Lace cross ties -->
+            <path d="M184 118 L178 131" stroke="#0047AB" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M236 117 L242 131" stroke="#0047AB" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M184 144 L178 157" stroke="#0047AB" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M236 143 L242 157" stroke="#0047AB" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+            <!-- TOE BOX -->
+            <path d="M102 196 Q88 186 86 170 Q86 150 98 134 Q114 116 148 108 Q164 104 168 106 L164 198 Q136 198 118 196 Z" fill="#E8E4DC" stroke="#D8D4CC" stroke-width="1"/>
+            <!-- Toe bumper -->
+            <path d="M86 170 Q86 150 100 134 Q112 120 136 112" stroke="rgba(0,0,0,0.08)" stroke-width="2" fill="none"/>
+
+            <!-- SIDE LOGO STRIPE -->
+            <path d="M255 152 Q300 140 358 148 Q382 154 386 168 Q382 180 358 184 Q318 188 270 182 Q250 176 250 166 Z" fill="rgba(232,93,4,0.12)" stroke="#E85D04" stroke-width="1.5"/>
+            <text x="308" y="170" text-anchor="middle" font-family="serif" font-size="13" font-weight="900" font-style="italic" fill="#E85D04" opacity="0.55" letter-spacing="1">RUN</text>
+
+            <!-- ANKLE COLLAR (top opening edge) -->
+            <path d="M164 100 Q215 82 300 80 Q372 80 410 106" stroke="#D4D0C8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Small label tags -->
+            <rect x="84" y="258" width="60" height="18" rx="3" fill="rgba(0,71,171,0.12)" stroke="rgba(0,71,171,0.25)" stroke-width="0.8"/>
+            <text x="114" y="271" text-anchor="middle" font-family="serif" font-size="8" fill="#0047AB" font-weight="600" letter-spacing="0.5">CUSHION</text>
+
+            <rect x="228" y="259" width="54" height="18" rx="3" fill="rgba(184,134,11,0.12)" stroke="rgba(184,134,11,0.25)" stroke-width="0.8"/>
+            <text x="255" y="271" text-anchor="middle" font-family="serif" font-size="8" fill="#B8860B" font-weight="600" letter-spacing="0.5">NEUTRAL</text>
+
+            <rect x="364" y="255" width="56" height="18" rx="3" fill="rgba(232,93,4,0.12)" stroke="rgba(232,93,4,0.3)" stroke-width="0.8"/>
+            <text x="392" y="268" text-anchor="middle" font-family="serif" font-size="8" fill="#E85D04" font-weight="600" letter-spacing="0.5">SUPPORT</text>
+          </svg>
+          <p class="gear-caption">Illustration: The modern running shoe &mdash; cushion, neutral, or support. Choosing the right one is the first decision you'll make.</p>
+        </figure>
+
+        <!-- OPENING TEXT -->
+        <p class="opening-graf">The running world will sell you a lot of things. Miracle shoes. Protein formulas. GPS watches that cost more than your first car. Most of it is noise. What actually matters to a beginner is far simpler: the right shoes, a reliable fuel strategy, and a short list of hard-won hacks that no one puts in the training plan.</p>
+
+        <p class="body-graf">After four marathons, two of them in Akron and one in New York City, here is the gear that stayed in the rotation and the tricks that saved miles I would otherwise have lost to blisters, bonking, and bad decisions.</p>
+
+        <div class="editors-note">
+          <p><strong>Editor's Note:</strong> These are personal recommendations based on real race experience, not sponsorships. No shoe company has ever given me free shoes. I'm still waiting for that to change.</p>
+        </div>
+
+      </div><!-- /.article-intro -->
+
+      <!-- ══ SECTION 1: SHOES ══ -->
+      <div class="content-section">
+        <div class="section-head">
+          <span class="section-num">01</span>
+          <h3>Shoes</h3>
+          <span class="section-tag">The Only Gear That Actually Matters</span>
+        </div>
+
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-pick">Top Pick &mdash; Beginners</div>
+            <div class="product-tag">Neutral &bull; Daily Trainer</div>
+            <div class="product-name">Brooks Ghost 16</div>
+            <div class="product-brand">Brooks Running</div>
+            <p class="product-note">The most forgiving daily trainer on the market. Soft, consistent cushioning that works on pavement, treadmill, and tired legs alike. The shoe you wear for 80% of your training runs.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-tag">Max Cushion &bull; Long Runs</div>
+            <div class="product-name">Hoka Clifton 9</div>
+            <div class="product-brand">Hoka</div>
+            <p class="product-note">Pillow-like underfoot feel that becomes essential once your long runs pass 14 miles. Unusually light for the stack height. If your joints are talking to you, these will quiet them down.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-tag">Stability &bull; Mild Overpronator</div>
+            <div class="product-name">ASICS Gel-Kayano 31</div>
+            <div class="product-brand">ASICS</div>
+            <p class="product-note">The benchmark stability shoe for runners who need medial support. Built for high mileage. If a running store tells you that you overpronate, this is the conversation you need to have.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-tag">Versatile &bull; Best Value</div>
+            <div class="product-name">Saucony Ride 17</div>
+            <div class="product-brand">Saucony</div>
+            <p class="product-note">Balanced cushion, good durability, reasonable price. The car that always starts &mdash; not flashy, completely dependable. An excellent second shoe once you're rotating two pairs.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-tag">Race Day &bull; Speed</div>
+            <div class="product-name">New Balance SuperComp Trainer</div>
+            <div class="product-brand">New Balance</div>
+            <p class="product-note">Carbon-plate energy return without the brutal stiffness of true race shoes. A beginner's gateway into plated footwear for those who want to feel what fast actually feels like.</p>
+          </div>
+        </div>
+
+        <p class="shoe-footnote"><strong>Before you buy anything:</strong> Visit a specialty running store for a gait analysis. It's free, takes 10 minutes, and will save you from six weeks of shin splints. Replace shoes every 300&ndash;500 miles. And never &mdash; ever &mdash; race in shoes you haven't trained in.</p>
+      </div>
+
+      <!-- ══ SECTION 2: NUTRITION & GELS ══ -->
+      <div class="content-section">
+        <div class="section-head">
+          <span class="section-num">02</span>
+          <h3>Gels &amp; Nutrition</h3>
+          <span class="section-tag">Fuel Before You're Hungry</span>
+        </div>
+
+        <div class="nutrition-grid">
+          <div class="gel-card">
+            <svg class="gel-icon" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="4" width="18" height="28" rx="6" fill="#0047AB"/>
+              <rect x="12" y="8" width="14" height="20" rx="4" fill="#A8C8E8"/>
+              <rect x="14" y="4" width="10" height="6" rx="2" fill="#003A91"/>
+              <text x="19" y="22" text-anchor="middle" font-size="7" font-weight="bold" fill="#0047AB" font-family="serif">GU</text>
+              <path d="M10 30 Q19 34 28 30" stroke="#0047AB" stroke-width="1.5" fill="none"/>
+            </svg>
+            <div class="gel-body">
+              <div class="gel-name">GU Energy Gel</div>
+              <div class="gel-type">Classic Energy Gel &bull; 100 cal</div>
+              <p class="gel-note">The industry standard. 28 flavors, widely available at aid stations. Start here. Take with water, never Gatorade &mdash; the combination can cause stomach upset.</p>
+            </div>
+          </div>
+
+          <div class="gel-card">
+            <svg class="gel-icon" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+              <rect x="9" y="4" width="20" height="28" rx="5" fill="#E85D04"/>
+              <rect x="11" y="7" width="16" height="22" rx="3" fill="#F8E8D8"/>
+              <rect x="13" y="4" width="12" height="5" rx="2" fill="#C04000"/>
+              <text x="19" y="20" text-anchor="middle" font-size="5.5" font-weight="bold" fill="#E85D04" font-family="serif">MAU</text>
+              <text x="19" y="27" text-anchor="middle" font-size="5" fill="#E85D04" font-family="serif">RTEN</text>
+            </svg>
+            <div class="gel-body">
+              <div class="gel-name">Maurten Gel 100</div>
+              <div class="gel-type">Hydrogel &bull; Easy on Stomach</div>
+              <p class="gel-note">What the elites use. Hydrogel technology means almost no GI distress. Tasteless and textureless &mdash; a revelation if you struggle with traditional gels. More expensive, worth it on race day.</p>
+            </div>
+          </div>
+
+          <div class="gel-card">
+            <svg class="gel-icon" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="6" width="22" height="24" rx="4" fill="#F8CE50"/>
+              <rect x="10" y="9" width="18" height="18" rx="3" fill="#FDE888"/>
+              <rect x="12" y="6" width="14" height="5" rx="2" fill="#D4A820"/>
+              <text x="19" y="21" text-anchor="middle" font-size="6" font-weight="bold" fill="#B8860B" font-family="serif">HONEY</text>
+              <text x="19" y="28" text-anchor="middle" font-size="5.5" fill="#B8860B" font-family="serif">STINGER</text>
+            </svg>
+            <div class="gel-body">
+              <div class="gel-name">Honey Stinger Gel</div>
+              <div class="gel-type">Natural &bull; Organic Honey Base</div>
+              <p class="gel-note">For runners who prefer real ingredients over lab formulas. Organic honey base with B vitamins. Slightly thicker consistency but smooth taste. Good for those sensitive to artificial flavors.</p>
+            </div>
+          </div>
+
+          <div class="gel-card">
+            <svg class="gel-icon" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="8" width="26" height="20" rx="4" fill="#2A7A2A"/>
+              <rect x="8" y="11" width="22" height="14" rx="3" fill="#5AB05A"/>
+              <rect x="10" y="8" width="18" height="5" rx="2" fill="#1A5A1A"/>
+              <text x="19" y="21" text-anchor="middle" font-size="5.5" font-weight="bold" fill="#fff" font-family="serif">CLIF</text>
+              <text x="19" y="27" text-anchor="middle" font-size="4.8" fill="#E8F8E8" font-family="serif">BLOKS</text>
+            </svg>
+            <div class="gel-body">
+              <div class="gel-name">CLIF Bloks</div>
+              <div class="gel-type">Chewable &bull; 33 cal per block</div>
+              <p class="gel-note">Chewable cubes for runners who gag on gels. Take two blocks every 30 minutes. Easier to portion, easier to carry, and psychologically easier for many beginners to manage mid-run.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fuel-rule">
+          <div class="fuel-rule-num">6</div>
+          <div class="fuel-rule-text">
+            <h4>The Fueling Rule: Start at Mile 6, Not Mile 16</h4>
+            <p>Don't wait until you feel depleted to take your first gel. By then it's too late. Take your first gel at mile 6&ndash;8, then every 45 minutes after. Carry your own &mdash; never rely on aid station supplies matching your planned fuel. Practice every gel flavor in training before you take it on race day.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SECTION 3: RUNNING HACKS ══ -->
+      <div class="content-section">
+        <div class="section-head">
+          <span class="section-num">03</span>
+          <h3>Running Hacks</h3>
+          <span class="section-tag">Field-Tested, Blister-Approved</span>
+        </div>
+
+        <div class="hacks-columns">
+
+          <div class="hack-item">
+            <div class="hack-num cobalt">1</div>
+            <div class="hack-body">
+              <div class="hack-title">Body Glide is non-negotiable</div>
+              <p class="hack-text">Apply Body Glide to your inner thighs, underarms, anywhere clothing rubs, and the back of your heels before every run over 6 miles. Chafing at mile 20 is not a character-building experience. It is just pain.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num orange">2</div>
+            <div class="hack-body">
+              <div class="hack-title">Lace your shoes for your feet</div>
+              <p class="hack-text">If your toenails are black after long runs, your laces are too tight at the toe box. Look up "heel lock lacing" &mdash; a simple technique that locks your heel in place and prevents your foot from sliding forward downhill.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num gold">3</div>
+            <div class="hack-body">
+              <div class="hack-title">Freeze your water bottles</div>
+              <p class="hack-text">For summer long runs, freeze your handheld water bottles halfway and top them up before you leave. You'll have cold water for 12&ndash;14 miles without needing a hydration vest. Works best in bottles without a straw.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num cobalt">4</div>
+            <div class="hack-body">
+              <div class="hack-title">Run-walk is a legitimate strategy</div>
+              <p class="hack-text">Jeff Galloway's run-walk method &mdash; run 4 minutes, walk 1 minute &mdash; has helped thousands of beginners finish marathons they wouldn't have otherwise finished. Walking is not failure. Strategic walking is racing smarter.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num orange">5</div>
+            <div class="hack-body">
+              <div class="hack-title">Walk every uphill over 6%</div>
+              <p class="hack-text">The energy cost of running a steep hill versus power-hiking it is significant. Save those leg muscles. Walk uphills aggressively in the first half of a race and you'll have fuel left when everyone else is walking the flats.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num gold">6</div>
+            <div class="hack-body">
+              <div class="hack-title">Run your easy days easy</div>
+              <p class="hack-text">The biggest mistake most beginners make is running every run at the same moderate effort. Easy runs should feel almost embarrassingly slow &mdash; conversational pace. This is where your aerobic base is built. Save the effort for long runs and tempo days.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num cobalt">7</div>
+            <div class="hack-body">
+              <div class="hack-title">Safety pin all four corners of your bib</div>
+              <p class="hack-text">Most runners pin two corners. When a bib flaps for 26.2 miles in the wind, it sounds like you're being chased by a very small flag. Four pins. Every time. Your fellow runners will thank you, and so will your race photos.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num orange">8</div>
+            <div class="hack-body">
+              <div class="hack-title">Nothing new on race day</div>
+              <p class="hack-text">No new shoes. No new socks. No new food, no new gel flavor, no new shorts. Every item you wear or consume on race day should have been tested on at least two long runs. Race day is not the day to experiment.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num gold">9</div>
+            <div class="hack-body">
+              <div class="hack-title">Compression socks reduce soreness</div>
+              <p class="hack-text">Wear graduated compression socks &mdash; knee-high &mdash; during and after long runs. They improve circulation, reduce swelling, and meaningfully shorten recovery time. CEP and Swiftwick are the brands worth owning.</p>
+            </div>
+          </div>
+
+          <div class="hack-item">
+            <div class="hack-num cobalt">10</div>
+            <div class="hack-body">
+              <div class="hack-title">Sleep is the best recovery tool</div>
+              <p class="hack-text">More valuable than ice baths, more effective than massage guns, cheaper than everything. 8&ndash;9 hours the night before a long run and 8&ndash;9 hours after. Your body does not rebuild during the run. It rebuilds during sleep.</p>
+            </div>
+          </div>
+
+        </div><!-- /.hacks-columns -->
+      </div><!-- /.content-section -->
+
+      <!-- ══ RACE DAY CHECKLIST ══ -->
+      <div class="checklist-banner">
+        <p class="checklist-label">Race Day &bull; Complete Checklist</p>
+        <h3 class="checklist-headline">Don't Leave the Hotel Without It</h3>
+        <div class="checklist-grid">
+
+          <div class="check-group">
+            <div class="check-group-title">The Night Before</div>
+            <ul class="check-list">
+              <li>Race bib (pinned, all 4 corners)</li>
+              <li>Timing chip on shoe</li>
+              <li>Outfit laid out (tested shoes)</li>
+              <li>Gels pre-counted &amp; loaded</li>
+              <li>Alarm set (×2)</li>
+              <li class="warning">Nothing new in the bag</li>
+            </ul>
+          </div>
+
+          <div class="check-group">
+            <div class="check-group-title">Race Morning</div>
+            <ul class="check-list">
+              <li>Breakfast 2&ndash;3 hrs before gun</li>
+              <li>Body Glide applied</li>
+              <li>Sunscreen (if warm)</li>
+              <li>Hydrate — 16 oz water</li>
+              <li>Bag drop packed</li>
+              <li>Know the corral location</li>
+            </ul>
+          </div>
+
+          <div class="check-group">
+            <div class="check-group-title">What to Carry</div>
+            <ul class="check-list">
+              <li>4&ndash;6 gels minimum</li>
+              <li>Salt tabs (warm weather)</li>
+              <li>Phone + headphones</li>
+              <li>ID (always)</li>
+              <li>Small cash / transit card</li>
+              <li>Throwaway warm layer</li>
+            </ul>
+          </div>
+
+          <div class="check-group">
+            <div class="check-group-title">Finish Line Bag</div>
+            <ul class="check-list">
+              <li>Dry change of clothes</li>
+              <li>Flip flops or slides</li>
+              <li>Snacks &amp; electrolyte drink</li>
+              <li>Compression socks</li>
+              <li>Foam roller (hotel room)</li>
+              <li class="warning">Celebrate. You earned it.</li>
+            </ul>
+          </div>
+
+        </div><!-- /.checklist-grid -->
+      </div><!-- /.checklist-banner -->
+
+    </main>
+  </div><!-- /.page-body -->
+
+  <footer>
+    &copy; 2020 <strong>Nicole's Run Club</strong> &mdash; Turning enthusiasm into endurance
+  </footer>
+
+</body>
+</html>
