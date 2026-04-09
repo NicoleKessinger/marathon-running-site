@@ -367,157 +367,352 @@
         <!-- FEMALE RUNNER ILLUSTRATION -->
         <figure class="runner-figure">
           <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
-
-            <!-- Sky gradient background -->
             <defs>
-              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#A8C8E8" stop-opacity="0.55"/>
-                <stop offset="100%" stop-color="#dfd7cc"/>
+              <!-- Golden-hour sky: deep violet-blue up top, amber/gold at horizon -->
+              <linearGradient id="ph_sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#1C1236"/>
+                <stop offset="38%"  stop-color="#6B3FA0" stop-opacity="0.9"/>
+                <stop offset="68%"  stop-color="#E8751A"/>
+                <stop offset="100%" stop-color="#F5C060"/>
               </linearGradient>
-              <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#b8b0a4"/>
-                <stop offset="100%" stop-color="#a0988c"/>
+              <!-- Road asphalt -->
+              <linearGradient id="ph_road" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#48403C"/>
+                <stop offset="100%" stop-color="#282018"/>
               </linearGradient>
+              <!-- Sun flare burst (upper right) -->
+              <radialGradient id="ph_sun" cx="78%" cy="13%" r="42%">
+                <stop offset="0%"   stop-color="#FFF5B0" stop-opacity="0.92"/>
+                <stop offset="18%"  stop-color="#FFD060" stop-opacity="0.55"/>
+                <stop offset="48%"  stop-color="#FF8C20" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#FF8C20" stop-opacity="0"/>
+              </radialGradient>
+              <!-- Vignette: clear center, dark edges -->
+              <radialGradient id="ph_vig" cx="50%" cy="52%" r="62%">
+                <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
+                <stop offset="65%"  stop-color="rgba(0,0,0,0.08)"/>
+                <stop offset="85%"  stop-color="rgba(0,0,0,0.38)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0.70)"/>
+              </radialGradient>
+              <!-- Warm golden wash from right -->
+              <linearGradient id="ph_warm" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#FF8C20" stop-opacity="0.14"/>
+                <stop offset="100%" stop-color="#FFB040" stop-opacity="0.04"/>
+              </linearGradient>
+              <!-- Skin: lit from upper-right sun -->
+              <radialGradient id="ph_face" cx="62%" cy="32%" r="60%">
+                <stop offset="0%"   stop-color="#F8D09C"/>
+                <stop offset="48%"  stop-color="#EAAA72"/>
+                <stop offset="100%" stop-color="#BE7840"/>
+              </radialGradient>
+              <linearGradient id="ph_skin_arm" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#BE7840"/>
+                <stop offset="42%"  stop-color="#E8A870"/>
+                <stop offset="100%" stop-color="#F8D09C"/>
+              </linearGradient>
+              <linearGradient id="ph_skin_leg" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#BE7840"/>
+                <stop offset="52%"  stop-color="#E8A870"/>
+                <stop offset="100%" stop-color="#F2BE88"/>
+              </linearGradient>
+              <!-- Hair: golden-blonde lit from behind by setting sun -->
+              <radialGradient id="ph_hair" cx="68%" cy="22%" r="62%">
+                <stop offset="0%"   stop-color="#F4D458"/>
+                <stop offset="32%"  stop-color="#D4A020"/>
+                <stop offset="100%" stop-color="#7A5008"/>
+              </radialGradient>
+              <!-- Singlet: orange with depth -->
+              <linearGradient id="ph_top" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%"   stop-color="#FF7220"/>
+                <stop offset="52%"  stop-color="#E85D04"/>
+                <stop offset="100%" stop-color="#A03800"/>
+              </linearGradient>
+              <!-- Shorts: cobalt with depth -->
+              <linearGradient id="ph_shorts" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%"   stop-color="#0068E0"/>
+                <stop offset="100%" stop-color="#002870"/>
+              </linearGradient>
+              <!-- Bokeh blur filter -->
+              <filter id="ph_bokeh" x="-25%" y="-25%" width="150%" height="150%">
+                <feGaussianBlur stdDeviation="5.5"/>
+              </filter>
+              <!-- Soft background blur -->
+              <filter id="ph_bgblur" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="2.5"/>
+              </filter>
             </defs>
 
-            <rect width="700" height="360" fill="url(#skyGrad)"/>
-            <!-- Road -->
-            <rect x="0" y="285" width="700" height="75" fill="url(#roadGrad)"/>
-            <rect x="0" y="283" width="700" height="4" fill="#888"/>
-            <!-- Road marking -->
-            <rect x="60" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
-            <rect x="160" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
-            <rect x="260" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
-            <rect x="460" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
-            <rect x="560" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
-            <rect x="630" y="310" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <!-- ── SKY ── -->
+            <rect width="700" height="360" fill="url(#ph_sky)"/>
 
-            <!-- Distant runners (background, stylized) -->
-            <ellipse cx="120" cy="255" rx="8" ry="9" fill="#ccc" opacity="0.5"/>
-            <rect x="117" y="264" width="6" height="18" rx="2" fill="#bbb" opacity="0.5"/>
-            <ellipse cx="580" cy="250" rx="7" ry="8" fill="#ccc" opacity="0.4"/>
-            <rect x="577" y="258" width="6" height="16" rx="2" fill="#bbb" opacity="0.4"/>
+            <!-- Sun core (upper right) -->
+            <ellipse cx="556" cy="38" rx="58" ry="48" fill="#FFF090" opacity="0.38"/>
+            <ellipse cx="556" cy="38" rx="32" ry="26" fill="#FFFCB8" opacity="0.62"/>
+            <ellipse cx="556" cy="38" rx="18" ry="15" fill="#FFFFF0" opacity="0.75"/>
 
-            <!-- ── MAIN FEMALE RUNNER (center stage) ── -->
-            <!-- Shadow -->
-            <ellipse cx="350" cy="291" rx="48" ry="8" fill="rgba(0,0,0,0.15)"/>
+            <!-- Distant city skyline (blurred silhouette) -->
+            <g filter="url(#ph_bgblur)" opacity="0.55">
+              <rect x="72"  y="158" width="16"  height="82"  fill="#1E1230"/>
+              <rect x="94"  y="142" width="24"  height="98"  fill="#160C20"/>
+              <rect x="124" y="167" width="13"  height="73"  fill="#1E1230"/>
+              <rect x="144" y="152" width="20"  height="88"  fill="#160C20"/>
+              <rect x="170" y="163" width="15"  height="77"  fill="#1E1230"/>
+              <rect x="192" y="174" width="11"  height="66"  fill="#1A1028"/>
+              <rect x="534" y="150" width="22"  height="90"  fill="#160C20"/>
+              <rect x="562" y="160" width="16"  height="80"  fill="#1E1230"/>
+              <rect x="585" y="146" width="28"  height="94"  fill="#160C20"/>
+              <rect x="620" y="156" width="19"  height="84"  fill="#1E1230"/>
+              <rect x="646" y="165" width="14"  height="75"  fill="#1A1028"/>
+              <!-- Lit windows suggestion -->
+              <rect x="98"  y="155" width="3" height="3" fill="#FFE080" opacity="0.9"/>
+              <rect x="108" y="162" width="3" height="3" fill="#FFE080" opacity="0.8"/>
+              <rect x="150" y="160" width="3" height="3" fill="#FFE080" opacity="0.8"/>
+              <rect x="540" y="158" width="3" height="3" fill="#FFE080" opacity="0.9"/>
+              <rect x="556" y="168" width="3" height="3" fill="#FFE080" opacity="0.8"/>
+              <rect x="592" y="153" width="3" height="3" fill="#FFE080" opacity="0.9"/>
+            </g>
 
-            <!-- === BACK LEG (right leg, extended behind) === -->
-            <!-- Upper back leg -->
-            <path d="M338 228 Q328 252 320 272 Q315 284 316 290" stroke="#F0C090" stroke-width="20" stroke-linecap="round" fill="none"/>
-            <!-- Lower back leg -->
-            <path d="M316 290 Q312 302 318 310" stroke="#F0C090" stroke-width="18" stroke-linecap="round" fill="none"/>
+            <!-- ── BOKEH CROWD (blurred circles of color, depth-of-field effect) ── -->
+            <g filter="url(#ph_bokeh)">
+              <!-- Left side crowd bokeh -->
+              <circle cx="55"  cy="244" r="24" fill="#FF8C20" opacity="0.62"/>
+              <circle cx="92"  cy="254" r="15" fill="#FFD860" opacity="0.52"/>
+              <circle cx="126" cy="240" r="20" fill="#FF3840" opacity="0.50"/>
+              <circle cx="156" cy="250" r="13" fill="#FFD860" opacity="0.58"/>
+              <circle cx="183" cy="242" r="22" fill="#3870FF" opacity="0.42"/>
+              <circle cx="210" cy="252" r="16" fill="#FF8C20" opacity="0.52"/>
+              <circle cx="72"  cy="268" r="17" fill="#FFB840" opacity="0.42"/>
+              <circle cx="108" cy="266" r="11" fill="#FF5820" opacity="0.50"/>
+              <circle cx="144" cy="264" r="14" fill="#FFFFA0" opacity="0.42"/>
+              <circle cx="178" cy="264" r="12" fill="#FF8888" opacity="0.42"/>
+              <circle cx="42"  cy="222" r="12" fill="#FF8C20" opacity="0.28"/>
+              <circle cx="160" cy="218" r="9"  fill="#3870FF" opacity="0.32"/>
+              <!-- Right side crowd bokeh -->
+              <circle cx="478" cy="246" r="22" fill="#FF8C20" opacity="0.56"/>
+              <circle cx="508" cy="240" r="17" fill="#FFD860" opacity="0.50"/>
+              <circle cx="538" cy="252" r="24" fill="#FF3840" opacity="0.46"/>
+              <circle cx="570" cy="244" r="15" fill="#3870FF" opacity="0.40"/>
+              <circle cx="598" cy="250" r="19" fill="#FF8C20" opacity="0.52"/>
+              <circle cx="626" cy="242" r="14" fill="#FFD860" opacity="0.56"/>
+              <circle cx="654" cy="248" r="17" fill="#FF5820" opacity="0.42"/>
+              <circle cx="494" cy="266" r="13" fill="#FFFFA0" opacity="0.40"/>
+              <circle cx="526" cy="264" r="15" fill="#FFB840" opacity="0.46"/>
+              <circle cx="556" cy="268" r="11" fill="#FF8888" opacity="0.36"/>
+              <circle cx="588" cy="263" r="16" fill="#FFF060" opacity="0.42"/>
+              <circle cx="616" cy="268" r="12" fill="#FF8C20" opacity="0.46"/>
+              <circle cx="488" cy="220" r="10" fill="#FFD860" opacity="0.30"/>
+              <circle cx="638" cy="215" r="12" fill="#FF8C20" opacity="0.32"/>
+            </g>
+
+            <!-- Crowd silhouette band (more defined, still blurred) -->
+            <g filter="url(#ph_bgblur)" opacity="0.48">
+              <rect x="18"  y="236" width="245" height="42" fill="rgba(22,14,36,0.65)" rx="2"/>
+              <rect x="458" y="236" width="245" height="42" fill="rgba(22,14,36,0.65)" rx="2"/>
+              <!-- Individual heads/torsos suggestion, left -->
+              <ellipse cx="45"  cy="238" rx="8" ry="8"  fill="#F0B870" opacity="0.75"/>
+              <rect    x="41"  y="246" width="9" height="25" fill="#304090" opacity="0.65"/>
+              <ellipse cx="72"  cy="240" rx="7" ry="7"  fill="#D09060" opacity="0.65"/>
+              <rect    x="68"  y="247" width="9" height="23" fill="#E85D04" opacity="0.55"/>
+              <ellipse cx="98"  cy="238" rx="8" ry="8"  fill="#F0B870" opacity="0.55"/>
+              <rect    x="94"  y="246" width="9" height="25" fill="#1A4090" opacity="0.55"/>
+              <ellipse cx="124" cy="240" rx="7" ry="7"  fill="#D09060" opacity="0.50"/>
+              <rect    x="120" y="247" width="9" height="23" fill="#304090" opacity="0.45"/>
+              <ellipse cx="148" cy="238" rx="8" ry="8"  fill="#E8B880" opacity="0.48"/>
+              <rect    x="144" y="246" width="9" height="25" fill="#E85D04" opacity="0.40"/>
+              <!-- Right side -->
+              <ellipse cx="494" cy="239" rx="8" ry="8"  fill="#D09060" opacity="0.68"/>
+              <rect    x="490" y="247" width="9" height="24" fill="#304090" opacity="0.58"/>
+              <ellipse cx="522" cy="238" rx="7" ry="7"  fill="#F0B870" opacity="0.56"/>
+              <rect    x="518" y="245" width="9" height="25" fill="#E85D04" opacity="0.50"/>
+              <ellipse cx="548" cy="240" rx="8" ry="8"  fill="#D09060" opacity="0.52"/>
+              <rect    x="544" y="248" width="9" height="23" fill="#1A4090" opacity="0.45"/>
+              <ellipse cx="576" cy="238" rx="7" ry="7"  fill="#E8B880" opacity="0.50"/>
+              <rect    x="572" y="245" width="9" height="25" fill="#304090" opacity="0.42"/>
+            </g>
+
+            <!-- Race barriers (sponsor banners) -->
+            <rect x="18"  y="277" width="244" height="15" fill="#E85D04" rx="2" opacity="0.92"/>
+            <rect x="18"  y="277" width="244" height="15" fill="none"    stroke="#B04000" stroke-width="0.8" rx="2"/>
+            <text x="80" y="289" font-family="sans-serif" font-size="7.5" fill="white" font-weight="bold" letter-spacing="2.5" opacity="0.95">RUN CLUB · 26.2</text>
+            <rect x="458" y="277" width="244" height="15" fill="#0047AB" rx="2" opacity="0.92"/>
+            <rect x="458" y="277" width="244" height="15" fill="none"    stroke="#00287A" stroke-width="0.8" rx="2"/>
+            <text x="500" y="289" font-family="sans-serif" font-size="7.5" fill="white" font-weight="bold" letter-spacing="2.5" opacity="0.95">MARATHON · 2025</text>
+
+            <!-- Road surface -->
+            <rect x="0" y="292" width="700" height="68" fill="url(#ph_road)"/>
+            <rect x="0" y="290" width="700" height="4" fill="#302820" opacity="0.85"/>
+            <!-- Road dashes (perspective, fading) -->
+            <rect x="48"  y="318" width="44" height="4" rx="1" fill="rgba(255,255,255,0.16)"/>
+            <rect x="156" y="318" width="44" height="4" rx="1" fill="rgba(255,255,255,0.16)"/>
+            <rect x="286" y="318" width="44" height="4" rx="1" fill="rgba(255,255,255,0.16)"/>
+            <rect x="416" y="318" width="44" height="4" rx="1" fill="rgba(255,255,255,0.16)"/>
+            <rect x="534" y="318" width="44" height="4" rx="1" fill="rgba(255,255,255,0.16)"/>
+            <rect x="628" y="318" width="44" height="4" rx="1" fill="rgba(255,255,255,0.16)"/>
+
+            <!-- Runner ground shadow -->
+            <ellipse cx="352" cy="294" rx="54" ry="7" fill="rgba(0,0,0,0.38)"/>
+
+            <!-- ══════════════════════════════════════════════════ -->
+            <!-- ── MAIN FEMALE RUNNER ──                          -->
+            <!-- ══════════════════════════════════════════════════ -->
+
+            <!-- BACK LEG (extended behind, in shadow) -->
+            <path d="M336 230 Q324 256 316 278 Q311 290 312 296" stroke="url(#ph_skin_leg)" stroke-width="21" stroke-linecap="round" fill="none"/>
+            <path d="M312 296 Q308 310 315 318" stroke="#C87840" stroke-width="18" stroke-linecap="round" fill="none"/>
             <!-- Back shoe -->
-            <path d="M308 308 Q306 318 310 322 Q324 326 338 320 Q342 312 334 306 Z" fill="#1a1a1a"/>
-            <rect x="306" y="316" width="34" height="8" rx="3" fill="#333"/>
-            <path d="M308 318 Q320 315 336 319" stroke="#E85D04" stroke-width="2" fill="none"/>
+            <path d="M303 313 Q299 324 304 332 Q320 338 339 330 Q343 321 333 312 Z" fill="#181818"/>
+            <rect x="297" y="328" width="44" height="9" rx="3.5" fill="#242424"/>
+            <path d="M304 322 Q318 317 337 323" stroke="#E85D04" stroke-width="2.5" fill="none"/>
+            <path d="M307 313 Q316 309 326 315" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" fill="none"/>
 
-            <!-- === TORSO === -->
-            <!-- Orange running singlet -->
-            <path d="M316 148 Q304 154 296 185 Q298 204 310 212 L320 226 L372 226 L382 212 Q394 204 396 185 Q388 154 376 148 L346 144 Z" fill="#E85D04"/>
-            <!-- Singlet shading -->
-            <path d="M346 144 L320 148 Q310 165 310 190 L320 210 L346 210 Z" fill="rgba(0,0,0,0.08)"/>
-            <!-- Singlet neckline -->
-            <path d="M330 148 Q346 142 362 148" stroke="#C04000" stroke-width="2" fill="none"/>
+            <!-- TORSO / SINGLET -->
+            <path d="M314 150 Q301 158 293 192 Q295 212 308 220 L318 234 L376 234 L386 220 Q399 212 401 192 Q393 158 380 150 L347 145 Z" fill="url(#ph_top)"/>
+            <!-- Shadow side (left) -->
+            <path d="M314 150 Q301 166 301 194 L310 217 L320 232 L347 232 L347 145 Z" fill="rgba(0,0,0,0.13)"/>
+            <!-- Sun-lit side highlight (right) -->
+            <path d="M380 150 Q395 166 395 192 L388 214 L378 232 L347 232 L347 145 Z" fill="rgba(255,185,80,0.11)"/>
+            <!-- Neckline -->
+            <path d="M328 150 Q347 143 366 150" stroke="#B83800" stroke-width="2.2" fill="none"/>
+            <!-- Subtle seam line -->
+            <path d="M323 154 Q317 175 317 204" stroke="rgba(255,255,255,0.09)" stroke-width="2" fill="none"/>
 
             <!-- Race bib -->
-            <rect x="328" y="170" width="36" height="28" rx="3" fill="#fff" stroke="#ddd" stroke-width="1"/>
-            <text x="346" y="182" text-anchor="middle" font-family="serif" font-size="9" fill="#555" letter-spacing="1">RUN</text>
-            <text x="346" y="194" text-anchor="middle" font-family="serif" font-size="13" font-weight="bold" fill="#0047AB">26</text>
+            <rect x="326" y="172" width="42" height="32" rx="3.5" fill="#FAFAFA" stroke="#ddd" stroke-width="0.5"/>
+            <circle cx="329" cy="175" r="1.8" fill="#CCCCCC"/>
+            <circle cx="365" cy="175" r="1.8" fill="#CCCCCC"/>
+            <circle cx="329" cy="201" r="1.8" fill="#CCCCCC"/>
+            <circle cx="365" cy="201" r="1.8" fill="#CCCCCC"/>
+            <text x="347" y="186" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#888" letter-spacing="2">RACE</text>
+            <text x="347" y="200" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0047AB">26</text>
 
-            <!-- === FRONT LEG (left leg, knee raised) === -->
-            <!-- Upper front leg -->
-            <path d="M356 224 Q368 248 374 266 Q378 278 374 286" stroke="#F0C090" stroke-width="22" stroke-linecap="round" fill="none"/>
-            <!-- Lower front leg -->
-            <path d="M374 286 Q372 300 376 308" stroke="#F0C090" stroke-width="19" stroke-linecap="round" fill="none"/>
-            <!-- Front shoe (raised slightly) -->
-            <path d="M366 304 Q362 316 366 322 Q380 328 396 320 Q399 311 390 304 Z" fill="#1a1a1a"/>
-            <rect x="362" y="316" width="36" height="8" rx="3" fill="#333"/>
-            <path d="M364 318 Q378 315 395 319" stroke="#E85D04" stroke-width="2" fill="none"/>
+            <!-- FRONT LEG (raised, leading, sun-lit) -->
+            <path d="M358 230 Q371 256 377 276 Q381 289 378 296" stroke="url(#ph_skin_leg)" stroke-width="23" stroke-linecap="round" fill="none"/>
+            <!-- Highlight on lit side -->
+            <path d="M362 232 Q373 256 378 274 Q381 285 378 291" stroke="#F2C898" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.32"/>
+            <path d="M378 296 Q376 312 381 320" stroke="#D09068" stroke-width="19" stroke-linecap="round" fill="none"/>
+            <!-- Front shoe (slightly raised) -->
+            <path d="M369 315 Q364 327 369 336 Q385 342 404 334 Q407 325 397 314 Z" fill="#181818"/>
+            <rect x="363" y="332" width="46" height="9" rx="3.5" fill="#242424"/>
+            <path d="M369 324 Q383 318 402 324" stroke="#E85D04" stroke-width="2.5" fill="none"/>
+            <path d="M371 315 Q382 311 393 317" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" fill="none"/>
 
-            <!-- Shorts (cobalt blue, over torso bottom) -->
-            <path d="M318 220 L312 268 L336 268 L346 242 L356 268 L380 268 L374 220 Z" fill="#0047AB"/>
-            <path d="M318 220 L312 268 L336 268 L346 242 Z" fill="rgba(0,0,0,0.1)"/>
+            <!-- SHORTS -->
+            <path d="M316 228 L310 278 L338 278 L347 249 L358 278 L384 278 L377 228 Z" fill="url(#ph_shorts)"/>
+            <path d="M316 228 L310 278 L338 278 L347 249 Z" fill="rgba(0,0,0,0.16)"/>
+            <path d="M377 228 L384 278 L358 278 L347 249 Z" fill="rgba(255,185,80,0.09)"/>
+            <path d="M310 278 Q347 283 384 278" stroke="#0058C0" stroke-width="2" fill="none"/>
 
-            <!-- === ARMS === -->
-            <!-- Back arm (left arm, pumped back) -->
-            <path d="M318 160 Q302 168 292 182 Q286 196 288 208" stroke="#F0C090" stroke-width="16" stroke-linecap="round" fill="none"/>
-            <!-- Back hand -->
-            <ellipse cx="290" cy="210" rx="11" ry="9" fill="#F0C090"/>
+            <!-- BACK ARM (swinging back, shadowed) -->
+            <path d="M316 163 Q297 173 287 190 Q280 205 284 218" stroke="#BE7840" stroke-width="17" stroke-linecap="round" fill="none"/>
+            <ellipse cx="284" cy="220" rx="13" ry="11" fill="#D09060"/>
+            <!-- Knuckle suggestion -->
+            <path d="M277 217 Q284 213 292 218" stroke="#BE7840" stroke-width="1.2" fill="none" opacity="0.5"/>
 
-            <!-- Front arm (right arm, driving forward) -->
-            <path d="M374 160 Q390 170 398 185 Q404 200 400 212" stroke="#F0C090" stroke-width="16" stroke-linecap="round" fill="none"/>
-            <!-- Front hand -->
-            <ellipse cx="401" cy="214" rx="11" ry="9" fill="#F0C090"/>
+            <!-- FRONT ARM (driving forward, sun-lit) -->
+            <path d="M380 163 Q397 174 405 192 Q411 208 407 221" stroke="#BE7840" stroke-width="17" stroke-linecap="round" fill="none"/>
+            <!-- Sun highlight on top of arm -->
+            <path d="M380 163 Q396 173 404 190 Q410 205 407 218" stroke="#F8D09C" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.32"/>
+            <ellipse cx="407" cy="223" rx="13" ry="11" fill="#D09060"/>
 
-            <!-- === HEAD & HAIR === -->
-            <!-- Neck -->
-            <path d="M338 138 Q346 134 354 138 L356 150 Q346 154 336 150 Z" fill="#F0C090"/>
+            <!-- NECK -->
+            <path d="M337 141 Q347 136 357 141 L360 155 Q347 159 334 155 Z" fill="#EAAA72"/>
+            <path d="M337 141 Q340 147 340 156 L334 155 Z" fill="rgba(0,0,0,0.10)"/>
 
-            <!-- Hair base (full head, golden blonde) -->
-            <ellipse cx="346" cy="112" rx="36" ry="38" fill="#D4A520"/>
+            <!-- ── HAIR ── -->
+            <!-- Deep base (occiput shadow) -->
+            <ellipse cx="347" cy="112" rx="38" ry="40" fill="#7A4E08"/>
+            <!-- Main blonde mass -->
+            <ellipse cx="348" cy="110" rx="35" ry="37" fill="url(#ph_hair)"/>
+            <!-- Crown volume -->
+            <path d="M318 106 Q316 86 327 73 Q337 61 348 59 Q360 61 369 72 Q379 84 379 106" fill="#C0880A"/>
+            <!-- Sun-kissed crown highlight -->
+            <path d="M332 65 Q348 58 364 66 Q358 62 348 60 Q338 60 332 65 Z" fill="#F4DC60" opacity="0.65"/>
 
-            <!-- Face (on top of hair) -->
-            <ellipse cx="346" cy="116" rx="28" ry="30" fill="#F0C090"/>
+            <!-- Ponytail (streaming dynamically to the left) -->
+            <path d="M318 99 Q294 88 272 83 Q252 79 238 90 Q232 97 239 106 Q253 113 270 108 Q290 102 306 108 Q313 110 318 114 Z" fill="#C0880A"/>
+            <path d="M318 112 Q298 117 280 112 Q262 107 250 116 Q246 123 252 129 Q270 133 290 127 Q310 120 318 120 Z" fill="#D4A020"/>
+            <path d="M318 119 Q300 126 282 123 Q266 120 256 129 Q260 138 276 134 Q294 130 316 128 Z" fill="#BE8010"/>
+            <!-- Individual hair strands catching backlight -->
+            <path d="M316 97 Q292 87 268 82" stroke="#E8C030" stroke-width="2"   fill="none" opacity="0.65"/>
+            <path d="M316 101 Q296 93 275 89 Q258 86 244 94" stroke="#D4A820" stroke-width="1.5" fill="none" opacity="0.55"/>
+            <path d="M316 105 Q298 98 280 95 Q264 92 252 100" stroke="#C89018" stroke-width="1.2" fill="none" opacity="0.48"/>
+            <!-- Backlit hair glow halo -->
+            <path d="M311 72 Q330 57 368 67 Q380 76 380 90" stroke="#F8E460" stroke-width="4" fill="none" opacity="0.25"/>
 
-            <!-- Hair sides and top detail -->
-            <path d="M316 102 Q314 88 322 78 Q332 66 346 64 Q360 66 368 76 Q376 88 376 102" fill="#D4A520"/>
+            <!-- ── FACE ── -->
+            <ellipse cx="348" cy="116" rx="30" ry="32" fill="url(#ph_face)"/>
+            <!-- Shadow on left cheek (away from sun) -->
+            <path d="M320 107 Q315 117 317 128 Q321 139 328 143 Q319 133 317 117 Z" fill="rgba(0,0,0,0.13)"/>
+            <!-- Specular highlight on right cheekbone -->
+            <ellipse cx="362" cy="120" rx="9" ry="6" fill="rgba(255,225,165,0.28)"/>
 
-            <!-- Ponytail flying back dynamically -->
-            <path d="M316 100 Q295 88 278 82 Q262 78 250 88 Q258 100 272 98 Q286 96 300 104 Q310 108 316 108 Z" fill="#C8981A"/>
-            <path d="M316 108 Q298 112 282 108 Q268 104 258 112 Q266 124 280 120 Q296 116 312 116 Z" fill="#D4A520"/>
-            <path d="M316 100 Q292 90 270 85" stroke="#B8860B" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <!-- Far eye (left — smaller in perspective) -->
+            <ellipse cx="336" cy="113" rx="5.8" ry="4.8" fill="#FEFEFE" opacity="0.96"/>
+            <ellipse cx="337" cy="113" rx="3.4" ry="3.4" fill="#3C2006"/>
+            <circle  cx="337" cy="113" r="2.1" fill="#1E0E02"/>
+            <circle  cx="338.6" cy="111.7" r="1.1" fill="rgba(255,255,255,0.92)"/>
+            <path d="M330 110 Q336 107 342 110" stroke="#3C2006" stroke-width="1.3" fill="none"/>
+            <path d="M330 113 Q336 116.5 342 113" stroke="#C07858" stroke-width="0.8" fill="none" opacity="0.45"/>
+            <path d="M329 105 Q335 102 342 104" stroke="#6A4810" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-            <!-- Hair highlight -->
-            <path d="M330 70 Q346 66 360 72 Q355 68 346 66 Q338 66 330 70 Z" fill="#E8C040" opacity="0.6"/>
-
-            <!-- Eyes — 3/4 view, both clearly visible -->
-            <!-- Far eye (left, slightly smaller in perspective) -->
-            <ellipse cx="334" cy="113" rx="5" ry="4" fill="#fff"/>
-            <ellipse cx="335" cy="113" rx="3" ry="3" fill="#5a3010"/>
-            <ellipse cx="336" cy="112" rx="1" ry="1" fill="#fff"/>
-            <path d="M329 110 Q334 107 340 110" stroke="#5a3010" stroke-width="1" fill="none"/>
-            <!-- Far eyebrow -->
-            <path d="M329 106 Q334 103 340 105" stroke="#8B6914" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-
-            <!-- Near eye (right, leading — larger and more prominent) -->
-            <ellipse cx="358" cy="110" rx="6.5" ry="5.5" fill="#fff"/>
-            <ellipse cx="359" cy="110" rx="3.8" ry="3.8" fill="#5a3010"/>
-            <ellipse cx="360" cy="109" rx="1.3" ry="1.3" fill="#fff"/>
-            <path d="M352 107 Q358 104 364 107" stroke="#5a3010" stroke-width="1.2" fill="none"/>
-            <!-- Near eyebrow -->
-            <path d="M352 103 Q358 100 365 102" stroke="#8B6914" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Near eye (right — larger, more prominent) -->
+            <ellipse cx="361" cy="110" rx="7.2" ry="6.2" fill="#FEFEFE" opacity="0.96"/>
+            <ellipse cx="362" cy="110" rx="4.2" ry="4.2" fill="#3C2006"/>
+            <circle  cx="362" cy="110" r="2.6" fill="#1E0E02"/>
+            <circle  cx="364"  cy="108.5" r="1.4" fill="rgba(255,255,255,0.92)"/>
+            <path d="M354 107 Q361 104 368 107" stroke="#2E1604" stroke-width="1.6" fill="none"/>
+            <path d="M354 111 Q361 115 368 111" stroke="#C07858" stroke-width="0.9" fill="none" opacity="0.45"/>
+            <!-- Raised brow (exertion) -->
+            <path d="M354 103 Q361 100 369 102" stroke="#6A4810" stroke-width="2.4" fill="none" stroke-linecap="round"/>
 
             <!-- Nose -->
-            <path d="M343 118 Q346 123 350 120" stroke="#d09060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M345 120 Q348 126 354 124 Q357 121 355 119" stroke="#C09060" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <ellipse cx="351" cy="125" rx="2.8" ry="1.8" fill="#AE7840" opacity="0.38"/>
 
-            <!-- Smile -->
-            <path d="M338 128 Q346 133 354 128" stroke="#c07850" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <!-- Cheek flush -->
-            <ellipse cx="332" cy="124" rx="6" ry="4" fill="#f0a080" opacity="0.3"/>
-            <ellipse cx="360" cy="124" rx="6" ry="4" fill="#f0a080" opacity="0.3"/>
+            <!-- Lips (slightly parted — effort) -->
+            <path d="M337 133 Q347 138 357 133" stroke="#C07050" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <path d="M340 133 Q347 135 353 133" fill="#D09068" opacity="0.48"/>
+            <path d="M341 134 Q347 137 352 134" stroke="#8A3E1E" stroke-width="1" fill="none" opacity="0.38"/>
 
-            <!-- Earring (small detail) -->
-            <circle cx="318" cy="118" r="3" fill="#E85D04"/>
+            <!-- Cheek flush (exertion glow + golden-hour warmth) -->
+            <ellipse cx="332" cy="124" rx="8"  ry="5.5" fill="#F09560" opacity="0.20"/>
+            <ellipse cx="363" cy="122" rx="9"  ry="6"   fill="#F09560" opacity="0.17"/>
 
-            <!-- === MOTION LINES === -->
-            <line x1="220" y1="168" x2="258" y2="172" stroke="#aaa" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
-            <line x1="215" y1="192" x2="256" y2="193" stroke="#aaa" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.6"/>
-            <line x1="218" y1="216" x2="256" y2="214" stroke="#aaa" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>
+            <!-- Ear -->
+            <ellipse cx="319" cy="119" rx="5.5" ry="7.5" fill="#D09060"/>
+            <ellipse cx="320" cy="119" rx="3.2" ry="5"   fill="#BE7848" opacity="0.48"/>
+            <!-- Earring (orange stud) -->
+            <circle cx="320" cy="124" r="3.2" fill="#E85D04"/>
+            <circle cx="320" cy="124" r="1.8" fill="#FF8040"/>
 
-            <!-- Crowd/finish line hint in distance -->
-            <rect x="580" y="220" width="4" height="60" fill="#0047AB" opacity="0.3"/>
-            <rect x="590" y="220" width="4" height="60" fill="#0047AB" opacity="0.3"/>
-            <rect x="580" y="220" width="14" height="6" fill="#E85D04" opacity="0.4"/>
+            <!-- ── MOTION SPEED LINES ── -->
+            <line x1="214" y1="172" x2="260" y2="176" stroke="rgba(255,205,100,0.50)" stroke-width="2"   stroke-dasharray="7,5"/>
+            <line x1="208" y1="194" x2="259" y2="196" stroke="rgba(255,205,100,0.40)" stroke-width="1.5" stroke-dasharray="6,5"/>
+            <line x1="212" y1="220" x2="259" y2="218" stroke="rgba(255,205,100,0.34)" stroke-width="1.2" stroke-dasharray="6,5"/>
+            <!-- Ponytail motion echo -->
+            <path d="M248 88 Q230 84 215 91"  stroke="rgba(214,162,20,0.24)" stroke-width="3.5" fill="none"/>
+            <path d="M250 106 Q232 102 218 109" stroke="rgba(214,162,20,0.18)" stroke-width="2.5" fill="none"/>
 
-            <!-- Ground shadow dots (halftone newspaper feel) -->
-            <circle cx="300" cy="294" r="2" fill="rgba(0,0,0,0.1)"/>
-            <circle cx="312" cy="296" r="1.5" fill="rgba(0,0,0,0.08)"/>
-            <circle cx="390" cy="294" r="2" fill="rgba(0,0,0,0.1)"/>
-            <circle cx="402" cy="296" r="1.5" fill="rgba(0,0,0,0.08)"/>
+            <!-- ── SUN FLARE OVERLAY ── -->
+            <rect width="700" height="360" fill="url(#ph_sun)"/>
+            <!-- Lens flare streaks -->
+            <line x1="556" y1="38" x2="330" y2="205" stroke="rgba(255,244,165,0.055)" stroke-width="65"/>
+            <line x1="556" y1="38" x2="190" y2="288" stroke="rgba(255,224,120,0.038)" stroke-width="42"/>
+            <line x1="556" y1="38" x2="690" y2="185" stroke="rgba(255,244,185,0.045)" stroke-width="28"/>
+            <!-- Lens flare circles (hexagonal bokeh hints) -->
+            <circle cx="432" cy="112" r="20" fill="rgba(255,242,105,0.065)" stroke="rgba(255,242,105,0.10)" stroke-width="1"/>
+            <circle cx="382" cy="148" r="13" fill="rgba(255,204,80,0.055)"  stroke="rgba(255,204,80,0.09)"  stroke-width="1"/>
+            <circle cx="316" cy="188" r="9"  fill="rgba(255,182,60,0.045)"/>
+
+            <!-- ── WARM COLOR WASH ── -->
+            <rect width="700" height="360" fill="url(#ph_warm)"/>
+
+            <!-- ── VIGNETTE (photographic, heavy at corners) ── -->
+            <rect width="700" height="360" fill="url(#ph_vig)"/>
+
           </svg>
         </figure>
-        <figcaption class="runner-caption">Illustration: A blonde female runner in full stride, race bib No. 26 &mdash; Nicole's Run Club, Est. 2020.</figcaption>
+        <figcaption class="runner-caption">Race photo: Nicole in full stride at golden hour &mdash; race bib No. 26, Nicole's Run Club, Est. 2020.</figcaption>
 
         <div class="lead-body">
           <p>Nicole's Run Club is a beginner-first space for anyone brave enough to lace up and chase the finish line. No elite times required &mdash; just the guts to start. Real training. Real talk. 26.2 real miles.</p>

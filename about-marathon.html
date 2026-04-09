@@ -373,210 +373,374 @@
         <figure class="hero-figure">
           <svg viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <linearGradient id="ancientSky" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#6BAED6"/>
-                <stop offset="55%" stop-color="#C8D8E8"/>
-                <stop offset="100%" stop-color="#E8D8A0"/>
+              <!-- ── DAGUERREOTYPE SEPIA FILTER ── -->
+              <filter id="dag_sepia" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+                <!-- Desaturate then sepia-tone -->
+                <feColorMatrix type="matrix" values="
+                  0.42 0.78 0.20 0 0.02
+                  0.37 0.70 0.17 0 0.01
+                  0.28 0.55 0.14 0 0
+                  0    0    0    1 0"/>
+                <!-- Boost contrast (darken shadows, brighten highlights) -->
+                <feComponentTransfer>
+                  <feFuncR type="gamma" amplitude="1.08" exponent="1.15" offset="-0.04"/>
+                  <feFuncG type="gamma" amplitude="1.02" exponent="1.10" offset="-0.03"/>
+                  <feFuncB type="gamma" amplitude="0.92" exponent="1.20" offset="-0.04"/>
+                </feComponentTransfer>
+              </filter>
+
+              <!-- Vignette: circular, very heavy at edges -->
+              <radialGradient id="dag_vig" cx="50%" cy="48%" r="58%">
+                <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
+                <stop offset="52%"  stop-color="rgba(0,0,0,0.05)"/>
+                <stop offset="76%"  stop-color="rgba(0,0,0,0.48)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0.88)"/>
+              </radialGradient>
+
+              <!-- Dramatic side-light: strong from right, shadow on left -->
+              <linearGradient id="dag_sidelight" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%"   stop-color="rgba(255,252,220,0.0)"/>
+                <stop offset="35%"  stop-color="rgba(255,252,220,0.0)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0.38)"/>
               </linearGradient>
-              <linearGradient id="ancientGround" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#C8A850"/>
-                <stop offset="100%" stop-color="#A08030"/>
+
+              <!-- Sky: daguerreotype-era high-contrast pale plate -->
+              <linearGradient id="dag_sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#F4E8B0"/>
+                <stop offset="48%"  stop-color="#E0D090"/>
+                <stop offset="100%" stop-color="#C8B870"/>
               </linearGradient>
-              <linearGradient id="marbleCol" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#E8E0C4"/>
-                <stop offset="50%" stop-color="#F0EAD2"/>
-                <stop offset="100%" stop-color="#DDD5B8"/>
+
+              <!-- Ground: dusty ochre earth -->
+              <linearGradient id="dag_gnd" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#B89848"/>
+                <stop offset="100%" stop-color="#907830"/>
+              </linearGradient>
+
+              <!-- Marble column: lit from right -->
+              <linearGradient id="dag_col_lit" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#908858"/>
+                <stop offset="55%"  stop-color="#C0B878"/>
+                <stop offset="100%" stop-color="#DED898"/>
+              </linearGradient>
+              <linearGradient id="dag_col2_lit" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#A89860"/>
+                <stop offset="60%"  stop-color="#D0C880"/>
+                <stop offset="100%" stop-color="#E8E0A0"/>
+              </linearGradient>
+
+              <!-- Skin: dramatic side-lit (right = light, left = deep shadow) -->
+              <linearGradient id="dag_skin" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#3A2008"/>
+                <stop offset="38%"  stop-color="#7A5228"/>
+                <stop offset="68%"  stop-color="#A87848"/>
+                <stop offset="100%" stop-color="#C89860"/>
+              </linearGradient>
+
+              <!-- Chiton: lit from right -->
+              <linearGradient id="dag_chiton" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#787068"/>
+                <stop offset="48%"  stop-color="#B8B098"/>
+                <stop offset="100%" stop-color="#D8D0B0"/>
               </linearGradient>
             </defs>
 
-            <!-- Sky & ground -->
-            <rect width="520" height="400" fill="url(#ancientSky)"/>
-            <!-- Distant hills -->
-            <path d="M0 220 Q80 180 160 200 Q240 185 320 195 Q400 180 520 205 L520 400 L0 400 Z" fill="#7A9E6A" opacity="0.45"/>
-            <path d="M0 240 Q120 210 260 228 Q380 210 520 230 L520 400 L0 400 Z" fill="#8AB078" opacity="0.35"/>
-            <!-- Ground -->
-            <rect x="0" y="295" width="520" height="105" fill="url(#ancientGround)"/>
-            <!-- Track / road surface -->
-            <path d="M0 303 Q260 298 520 303" stroke="#A89040" stroke-width="2" fill="none"/>
-            <!-- Ground texture lines -->
-            <path d="M0 320 Q130 316 260 318 Q390 316 520 320" stroke="#907828" stroke-width="0.8" fill="none" opacity="0.5"/>
-            <path d="M0 340 Q130 337 260 338 Q390 337 520 340" stroke="#907828" stroke-width="0.6" fill="none" opacity="0.4"/>
+            <!-- ══ ALL SCENE CONTENT — sepia filter applied to this group ══ -->
+            <g filter="url(#dag_sepia)">
 
-            <!-- Sun -->
-            <circle cx="450" cy="65" r="32" fill="#F8CE50" opacity="0.9"/>
-            <circle cx="450" cy="65" r="24" fill="#FADC70"/>
-            <line x1="450" y1="25" x2="450" y2="17" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
-            <line x1="480" y1="36" x2="486" y2="30" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
-            <line x1="490" y1="65" x2="498" y2="65" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
-            <line x1="480" y1="94" x2="486" y2="100" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
-            <line x1="420" y1="36" x2="414" y2="30" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
-            <line x1="410" y1="65" x2="402" y2="65" stroke="#F8CE50" stroke-width="2.5" opacity="0.7"/>
+              <!-- Sky (pale, overexposed plate look) -->
+              <rect width="520" height="400" fill="url(#dag_sky)"/>
 
-            <!-- ── DORIC COLUMNS (left background) ── -->
-            <!-- Column 1 -->
-            <rect x="22" y="100" width="42" height="200" fill="url(#marbleCol)" rx="2"/>
-            <!-- Flutes col 1 -->
-            <line x1="30" y1="100" x2="30" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
-            <line x1="38" y1="100" x2="38" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
-            <line x1="46" y1="100" x2="46" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
-            <line x1="54" y1="100" x2="54" y2="300" stroke="rgba(0,0,0,0.07)" stroke-width="2.5"/>
-            <!-- Echinus (capital) col 1 -->
-            <path d="M18 100 Q22 90 43 88 Q64 90 68 100 Z" fill="#DDD5B4"/>
-            <!-- Abacus col 1 -->
-            <rect x="14" y="82" width="58" height="10" fill="#D4CCA8"/>
-            <!-- Base col 1 -->
-            <rect x="18" y="298" width="50" height="8" fill="#DDD5B4"/>
-            <rect x="14" y="304" width="58" height="6" fill="#D4CCA8"/>
+              <!-- Distant hills/landscape (subtle) -->
+              <path d="M0 218 Q80 188 175 205 Q258 190 345 200 Q425 186 520 208 L520 400 L0 400 Z" fill="#8A9E68" opacity="0.42"/>
+              <path d="M0 235 Q128 210 270 228 Q396 210 520 232 L520 400 L0 400 Z" fill="#9AAE78" opacity="0.34"/>
 
-            <!-- Column 2 -->
-            <rect x="82" y="110" width="38" height="190" fill="#E4DCC0" rx="2"/>
-            <line x1="89" y1="110" x2="89" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
-            <line x1="96" y1="110" x2="96" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
-            <line x1="103" y1="110" x2="103" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
-            <line x1="110" y1="110" x2="110" y2="300" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
-            <path d="M78 110 Q82 100 101 98 Q120 100 124 110 Z" fill="#D8D0B0"/>
-            <rect x="74" y="92" width="54" height="10" fill="#D0C8A0"/>
-            <rect x="78" y="298" width="46" height="7" fill="#D8D0B0"/>
-            <rect x="74" y="303" width="54" height="6" fill="#D0C8A0"/>
+              <!-- Ground (dusty earth path) -->
+              <rect x="0" y="293" width="520" height="107" fill="url(#dag_gnd)"/>
+              <path d="M0 301 Q260 296 520 301" stroke="#907028" stroke-width="2.2" fill="none"/>
+              <path d="M0 320 Q130 315 260 318 Q390 315 520 320" stroke="#786018" stroke-width="1" fill="none" opacity="0.55"/>
+              <path d="M0 342 Q130 338 260 340 Q390 338 520 342" stroke="#786018" stroke-width="0.7" fill="none" opacity="0.40"/>
+              <!-- Ground cracks (aged, dry) -->
+              <path d="M44 312 Q75 309 96 314"  stroke="#5A4010" stroke-width="0.6" fill="none" opacity="0.50"/>
+              <path d="M310 307 Q352 304 384 310" stroke="#5A4010" stroke-width="0.6" fill="none" opacity="0.42"/>
+              <path d="M180 330 Q220 328 248 333" stroke="#5A4010" stroke-width="0.5" fill="none" opacity="0.35"/>
 
-            <!-- Entablature connecting columns -->
-            <rect x="14" y="72" width="120" height="13" fill="#D0C8A0"/>
-            <rect x="14" y="60" width="120" height="14" fill="#C8C0A0"/>
-            <!-- Meander frieze pattern -->
-            <path d="M20 66 L28 66 L28 72 L36 72 L36 66 L44 66 L44 76 L28 76" stroke="#A09050" stroke-width="1.2" fill="none"/>
-            <path d="M52 66 L60 66 L60 72 L68 72 L68 66 L76 66 L76 76 L60 76" stroke="#A09050" stroke-width="1.2" fill="none"/>
-            <path d="M84 66 L92 66 L92 72 L100 72 L100 66 L108 66 L108 76 L92 76" stroke="#A09050" stroke-width="1.2" fill="none"/>
-            <!-- Pediment triangle -->
-            <path d="M14 60 L74 30 L134 60 Z" fill="#C8C0A0" stroke="#B0A888" stroke-width="1"/>
-            <!-- Pediment acroteria -->
-            <circle cx="14" cy="60" r="4" fill="#C8C0A0"/>
-            <circle cx="74" cy="30" r="5" fill="#D0C8A0"/>
-            <circle cx="134" cy="60" r="4" fill="#C8C0A0"/>
+              <!-- ── DORIC COLONNADE (left background, high contrast marble) ── -->
+              <!-- Column 1 (shadowed, rear) -->
+              <rect x="16" y="94" width="46" height="202" fill="#A89858"/>
+              <line x1="24"  y1="94"  x2="24"  y2="296" stroke="rgba(0,0,0,0.18)" stroke-width="3.5"/>
+              <line x1="33"  y1="94"  x2="33"  y2="296" stroke="rgba(0,0,0,0.14)" stroke-width="3"/>
+              <line x1="42"  y1="94"  x2="42"  y2="296" stroke="rgba(0,0,0,0.18)" stroke-width="3.5"/>
+              <line x1="51"  y1="94"  x2="51"  y2="296" stroke="rgba(0,0,0,0.14)" stroke-width="3"/>
+              <line x1="58"  y1="94"  x2="58"  y2="296" stroke="rgba(255,255,200,0.12)" stroke-width="2.5"/>
+              <!-- Capital -->
+              <path d="M12 94 Q16 82 39 80 Q62 82 68 94 Z" fill="#988848"/>
+              <rect x="8"  y="74" width="64" height="11" fill="#908040"/>
+              <!-- Base -->
+              <rect x="12" y="294" width="54" height="9" fill="#988848"/>
+              <rect x="8"  y="301" width="64" height="7" fill="#908040"/>
 
-            <!-- ── OLIVE TREE (right background) ── -->
-            <rect x="418" y="238" width="11" height="64" fill="#7A5C2A" rx="3"/>
-            <ellipse cx="424" cy="228" rx="38" ry="32" fill="#4A7A28"/>
-            <ellipse cx="406" cy="238" rx="24" ry="20" fill="#3D6A22"/>
-            <ellipse cx="442" cy="236" rx="22" ry="18" fill="#507C2A"/>
-            <ellipse cx="424" cy="210" rx="18" ry="14" fill="#4A7828"/>
-            <!-- Olive fruits -->
-            <ellipse cx="412" cy="226" rx="4" ry="3" fill="#2A5018"/>
-            <ellipse cx="432" cy="220" rx="3.5" ry="2.5" fill="#2A5018"/>
-            <ellipse cx="445" cy="232" rx="3.5" ry="2.5" fill="#2A5018"/>
-            <ellipse cx="400" cy="244" rx="3" ry="2.5" fill="#2A5018"/>
-            <!-- Silver-green leaf highlights -->
-            <path d="M415 215 Q420 210 428 215" stroke="#7AB040" stroke-width="1.5" fill="none" opacity="0.6"/>
-            <path d="M432 225 Q438 220 444 226" stroke="#7AB040" stroke-width="1.5" fill="none" opacity="0.6"/>
+              <!-- Column 2 (mid, brighter — lit side) -->
+              <rect x="78" y="106" width="42" height="190" fill="url(#dag_col_lit)"/>
+              <line x1="86"  y1="106" x2="86"  y2="296" stroke="rgba(0,0,0,0.14)" stroke-width="3"/>
+              <line x1="94"  y1="106" x2="94"  y2="296" stroke="rgba(0,0,0,0.11)" stroke-width="3"/>
+              <line x1="102" y1="106" x2="102" y2="296" stroke="rgba(0,0,0,0.14)" stroke-width="3"/>
+              <line x1="110" y1="106" x2="110" y2="296" stroke="rgba(0,0,0,0.11)" stroke-width="3"/>
+              <line x1="116" y1="106" x2="116" y2="296" stroke="rgba(255,255,200,0.14)" stroke-width="2"/>
+              <path d="M74 106 Q78 96 99 93 Q120 96 126 106 Z" fill="#C8B868"/>
+              <rect x="70"  y="87" width="60"  height="11" fill="#B8A858"/>
+              <rect x="74"  y="294" width="52" height="8"  fill="#C8B868"/>
+              <rect x="70"  y="300" width="60" height="6"  fill="#B8A858"/>
 
-            <!-- ── MAIN GREEK RUNNER ── -->
-            <!-- Shadow -->
-            <ellipse cx="270" cy="302" rx="46" ry="8" fill="rgba(0,0,0,0.18)"/>
+              <!-- Column 3 (right edge, partially visible) -->
+              <rect x="148" y="116" width="38" height="180" fill="#B0A868" opacity="0.72"/>
+              <line x1="155" y1="116" x2="155" y2="296" stroke="rgba(0,0,0,0.10)" stroke-width="2.5"/>
+              <line x1="163" y1="116" x2="163" y2="296" stroke="rgba(0,0,0,0.10)" stroke-width="2.5"/>
+              <line x1="171" y1="116" x2="171" y2="296" stroke="rgba(0,0,0,0.10)" stroke-width="2.5"/>
+              <path d="M144 116 Q148 107 167 105 Q186 107 190 116 Z" fill="#A89858" opacity="0.72"/>
+              <rect x="140" y="99"  width="54" height="10" fill="#989048" opacity="0.72"/>
 
-            <!-- Back leg (extended behind) -->
-            <path d="M260 248 Q250 268 242 286 Q238 297 240 303" stroke="#C49060" stroke-width="19" stroke-linecap="round" fill="none"/>
-            <path d="M240 303 Q238 313 242 319" stroke="#C49060" stroke-width="17" stroke-linecap="round" fill="none"/>
-            <!-- Back sandal -->
-            <path d="M232 316 Q228 326 232 333 Q246 338 260 330 Q263 322 254 316 Z" fill="#8B6020"/>
-            <path d="M232 322 Q244 317 260 322" stroke="#6B4010" stroke-width="2" fill="none"/>
-            <path d="M242 316 L248 308" stroke="#6B4010" stroke-width="1.5" fill="none"/>
-            <path d="M252 316 L258 308" stroke="#6B4010" stroke-width="1.5" fill="none"/>
+              <!-- Entablature (horizontal beam atop columns) -->
+              <rect x="8"  y="64" width="130" height="14" fill="#A89848"/>
+              <rect x="8"  y="52" width="130" height="14" fill="#A09040"/>
+              <!-- Triglyphs -->
+              <rect x="16" y="54" width="14" height="12" fill="#887830"/>
+              <rect x="40" y="54" width="14" height="12" fill="#887830"/>
+              <rect x="64" y="54" width="14" height="12" fill="#887830"/>
+              <rect x="88" y="54" width="14" height="12" fill="#887830"/>
+              <rect x="112"y="54" width="14" height="12" fill="#887830"/>
+              <!-- Triglyph grooves -->
+              <line x1="22" y1="54" x2="22" y2="66" stroke="#686018" stroke-width="1.8"/>
+              <line x1="46" y1="54" x2="46" y2="66" stroke="#686018" stroke-width="1.8"/>
+              <line x1="70" y1="54" x2="70" y2="66" stroke="#686018" stroke-width="1.8"/>
+              <line x1="94" y1="54" x2="94" y2="66" stroke="#686018" stroke-width="1.8"/>
+              <!-- Pediment (triangular gable) -->
+              <path d="M8 52 L73 20 L138 52 Z" fill="#A09038" stroke="#888028" stroke-width="1.2"/>
+              <!-- Pediment sculpture (reclining figure hint) -->
+              <ellipse cx="73" cy="40" rx="9"  ry="11" fill="#989030" opacity="0.58"/>
+              <ellipse cx="30" cy="49" rx="7"  ry="8"  fill="#989030" opacity="0.40"/>
+              <ellipse cx="116"cy="49" rx="7"  ry="8"  fill="#989030" opacity="0.40"/>
+              <!-- Acroteria (decorative finials) -->
+              <circle cx="8"   cy="52" r="5.5" fill="#A09038"/>
+              <circle cx="73"  cy="20" r="7"   fill="#A89838"/>
+              <circle cx="138" cy="52" r="5.5" fill="#A09038"/>
 
-            <!-- Chiton (white/cream running garment) -->
-            <path d="M248 190 Q236 198 228 228 Q230 248 242 255 L248 268 L290 268 L296 255 Q308 248 310 228 Q302 198 290 190 L270 186 Z" fill="#F2EBD5"/>
-            <!-- Chiton folds/pleats -->
-            <path d="M250 192 Q242 215 242 248" stroke="#E0D4B5" stroke-width="1.8" fill="none"/>
-            <path d="M268 186 L268 268" stroke="#E0D4B5" stroke-width="1.5" fill="none"/>
-            <path d="M286 192 Q294 215 294 248" stroke="#E0D4B5" stroke-width="1.8" fill="none"/>
-            <!-- Chiton hem & border (golden) -->
-            <path d="M228 230 Q234 252 242 258 L248 270 L290 270 L296 258 Q304 252 310 230" stroke="#C8A040" stroke-width="2.5" fill="none"/>
-            <!-- Belt -->
-            <path d="M235 218 Q268 212 302 218" stroke="#C8A040" stroke-width="3" fill="none"/>
+              <!-- ── OLIVE TREE (right background, sepia-toned greens) ── -->
+              <rect x="420" y="238" width="13" height="66" fill="#5C3E18" rx="3"/>
+              <ellipse cx="428" cy="236" rx="44" ry="34" fill="#3A5A18" opacity="0.9"/>
+              <ellipse cx="410" cy="244" rx="28" ry="24" fill="#2E4E12"/>
+              <ellipse cx="446" cy="242" rx="25" ry="21" fill="#3A5818"/>
+              <ellipse cx="428" cy="215" rx="21" ry="17" fill="#324E14"/>
+              <ellipse cx="413" cy="222" rx="16" ry="14" fill="#2A4410"/>
+              <!-- Sun-caught leaf masses -->
+              <ellipse cx="444" cy="212" rx="14" ry="11" fill="#4A6820" opacity="0.72"/>
+              <ellipse cx="452" cy="228" rx="12" ry="10" fill="#486620"/>
+              <!-- Olives -->
+              <ellipse cx="415" cy="226" rx="4.5" ry="3.5" fill="#1C3A0E"/>
+              <ellipse cx="436" cy="220" rx="4"   ry="3"   fill="#1C3A0E"/>
+              <ellipse cx="449" cy="230" rx="4"   ry="3"   fill="#1C3A0E"/>
+              <ellipse cx="403" cy="240" rx="3.5" ry="3"   fill="#1C3A0E"/>
+              <!-- Silver leaf highlights -->
+              <path d="M418 213 Q424 207 432 213" stroke="#587830" stroke-width="1.8" fill="none" opacity="0.48"/>
+              <path d="M436 222 Q442 216 448 223" stroke="#587830" stroke-width="1.8" fill="none" opacity="0.48"/>
 
-            <!-- Front leg (raised, dynamic) -->
-            <path d="M282 264 Q294 285 300 302 Q305 315 300 323" stroke="#C49060" stroke-width="21" stroke-linecap="round" fill="none"/>
-            <path d="M300 323 Q299 333 304 339" stroke="#C49060" stroke-width="18" stroke-linecap="round" fill="none"/>
-            <!-- Front sandal -->
-            <path d="M294 335 Q290 346 294 352 Q308 357 324 349 Q326 341 318 334 Z" fill="#8B6020"/>
-            <path d="M294 341 Q308 336 323 341" stroke="#6B4010" stroke-width="2" fill="none"/>
-            <path d="M304 335 L310 326" stroke="#6B4010" stroke-width="1.5" fill="none"/>
-            <path d="M314 335 L320 326" stroke="#6B4010" stroke-width="1.5" fill="none"/>
+              <!-- ── MAIN GREEK RUNNER (Pheidippides) ── -->
+              <!-- Ground shadow (elongated, low-angle sun) -->
+              <ellipse cx="266" cy="300" rx="55" ry="9" fill="rgba(0,0,0,0.32)"/>
 
-            <!-- Back arm (pumped back) -->
-            <path d="M252 202 Q234 212 224 228 Q218 242 220 252" stroke="#C49060" stroke-width="15" stroke-linecap="round" fill="none"/>
-            <ellipse cx="220" cy="254" rx="11" ry="9" fill="#C49060"/>
+              <!-- BACK LEG (extended, shadowed) -->
+              <path d="M256 250 Q246 272 238 290 Q234 302 236 309" stroke="#7A5028" stroke-width="20" stroke-linecap="round" fill="none"/>
+              <path d="M236 309 Q233 321 238 329" stroke="#6A4018" stroke-width="18" stroke-linecap="round" fill="none"/>
+              <!-- Back sandal -->
+              <path d="M228 324 Q224 337 228 345 Q244 350 260 341 Q263 332 253 324 Z" fill="#5A3410"/>
+              <path d="M228 331 Q242 325 260 331" stroke="#402408" stroke-width="3" fill="none"/>
+              <path d="M238 324 L244 313" stroke="#402408" stroke-width="2" fill="none"/>
+              <path d="M250 324 L256 313" stroke="#402408" stroke-width="2" fill="none"/>
+              <path d="M230 338 L234 324" stroke="#402408" stroke-width="1.5" fill="none"/>
 
-            <!-- Front arm (driving forward) -->
-            <path d="M288 202 Q306 214 314 230 Q318 244 315 254" stroke="#C49060" stroke-width="15" stroke-linecap="round" fill="none"/>
-            <ellipse cx="316" cy="256" rx="11" ry="9" fill="#C49060"/>
+              <!-- CHITON (linen running garment — dramatically lit, high contrast folds) -->
+              <path d="M244 193 Q231 202 223 234 Q225 256 238 263 L244 276 L292 276 L298 263 Q311 256 313 234 Q305 202 292 193 L268 188 Z" fill="url(#dag_chiton)"/>
+              <!-- Fold shadows (strong, theatrical daguerreotype contrast) -->
+              <path d="M246 195 Q237 222 237 258" stroke="rgba(0,0,0,0.25)" stroke-width="2.5" fill="none"/>
+              <path d="M258 189 L256 276" stroke="rgba(0,0,0,0.20)" stroke-width="2" fill="none"/>
+              <path d="M268 188 L268 276" stroke="rgba(0,0,0,0.15)" stroke-width="2" fill="none"/>
+              <path d="M278 189 L280 276" stroke="rgba(0,0,0,0.12)" stroke-width="2" fill="none"/>
+              <path d="M288 195 Q297 222 297 258" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" fill="none"/>
+              <!-- Shadow on left side of chiton (deep) -->
+              <path d="M223 222 Q226 250 236 262 L244 278 L268 278 L268 188 Q258 196 247 212 Q237 228 230 248 Z" fill="rgba(0,0,0,0.14)"/>
+              <!-- Chiton hem border (gold meander trim) -->
+              <path d="M223 236 Q230 258 238 265 L244 278 L292 278 L298 265 Q306 258 313 236" stroke="#C8A038" stroke-width="3.5" fill="none"/>
+              <!-- Belt with double line -->
+              <path d="M230 222 Q268 215 307 222" stroke="#C8A038" stroke-width="4" fill="none"/>
+              <path d="M230 226 Q268 220 307 226" stroke="#987018" stroke-width="1.8" fill="none" opacity="0.55"/>
+              <!-- Shoulder fibula (decorative pin) -->
+              <circle cx="292" cy="198" r="5"   fill="#C8A038"/>
+              <circle cx="292" cy="198" r="3"   fill="#F0C850"/>
+              <circle cx="292" cy="198" r="1.5" fill="#C8A038"/>
 
-            <!-- Neck -->
-            <path d="M261 178 Q270 174 278 178 L280 192 Q270 196 260 192 Z" fill="#C49060"/>
+              <!-- FRONT LEG (raised, driving forward — lit by right light) -->
+              <path d="M284 272 Q296 292 303 310 Q308 324 304 333" stroke="#9A6838" stroke-width="22" stroke-linecap="round" fill="none"/>
+              <!-- Lit highlight on front leg (right face) -->
+              <path d="M288 276 Q298 295 304 312 Q308 323 305 330" stroke="#C89860" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.42"/>
+              <path d="M304 333 Q302 345 307 352" stroke="#8A5828" stroke-width="18" stroke-linecap="round" fill="none"/>
+              <!-- Front sandal -->
+              <path d="M296 347 Q292 360 296 368 Q312 374 330 364 Q332 356 323 347 Z" fill="#5A3410"/>
+              <path d="M296 355 Q312 348 329 354" stroke="#402408" stroke-width="3" fill="none"/>
+              <path d="M306 347 L312 337" stroke="#402408" stroke-width="2" fill="none"/>
+              <path d="M318 347 L324 337" stroke="#402408" stroke-width="2" fill="none"/>
 
-            <!-- Head -->
-            <ellipse cx="270" cy="162" rx="28" ry="30" fill="#C49060"/>
+              <!-- BACK ARM (shadowed, pumped back) -->
+              <path d="M248 207 Q228 218 218 236 Q212 252 214 263" stroke="#6A4018" stroke-width="17" stroke-linecap="round" fill="none"/>
+              <ellipse cx="215" cy="266" rx="13" ry="11" fill="#6A4018"/>
 
-            <!-- Dark curly hair -->
-            <path d="M244 152 Q246 130 258 120 Q270 110 282 120 Q294 130 296 152" fill="#221408"/>
-            <path d="M244 153 Q240 135 248 122 Q254 115 264 113" fill="#221408"/>
-            <path d="M296 153 Q300 135 292 122 Q286 115 276 113" fill="#221408"/>
-            <!-- Hair curl texture -->
-            <path d="M246 150 Q242 140 248 133 Q254 127 260 133" stroke="#150C04" stroke-width="1.5" fill="none"/>
-            <path d="M294 150 Q298 140 292 133 Q286 127 280 133" stroke="#150C04" stroke-width="1.5" fill="none"/>
-            <path d="M258 116 Q270 110 282 116" stroke="#150C04" stroke-width="1.5" fill="none"/>
+              <!-- FRONT ARM (sun-lit, driving forward) -->
+              <path d="M290 207 Q310 220 318 239 Q322 254 319 265" stroke="#9A6838" stroke-width="17" stroke-linecap="round" fill="none"/>
+              <!-- Highlight on lit upper surface -->
+              <path d="M292 207 Q311 219 318 237 Q322 251 320 262" stroke="#C89860" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.45"/>
+              <ellipse cx="320" cy="268" rx="13" ry="11" fill="#A87840"/>
 
-            <!-- Face features — 3/4 view, both eyes clearly visible -->
-            <!-- Near eye (right, toward direction of run — larger, more prominent) -->
-            <ellipse cx="281" cy="156" rx="6" ry="5" fill="#fff"/>
-            <ellipse cx="282" cy="156" rx="3.5" ry="3.5" fill="#3A1808"/>
-            <ellipse cx="283" cy="155" rx="1.2" ry="1.2" fill="#fff"/>
-            <!-- Far eye (left — slightly smaller in perspective) -->
-            <ellipse cx="260" cy="158" rx="4.5" ry="4" fill="#fff"/>
-            <ellipse cx="261" cy="158" rx="2.8" ry="2.8" fill="#3A1808"/>
-            <ellipse cx="262" cy="157" rx="1" ry="1" fill="#fff"/>
-            <!-- Near brow -->
-            <path d="M275 148 Q281 145 288 147" stroke="#5A3010" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <!-- Far brow -->
-            <path d="M254 150 Q260 147 267 149" stroke="#5A3010" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <!-- Nose bridge -->
-            <path d="M271 162 Q274 168 282 166" stroke="#A06840" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <!-- Mouth -->
-            <path d="M264 175 Q272 179 282 176" stroke="#A06840" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <!-- Greek beard -->
-            <path d="M248 162 Q252 172 260 178 Q270 182 280 178 Q288 174 292 164" stroke="#2A1408" stroke-width="2" fill="none"/>
-            <path d="M250 164 Q256 174 268 180" stroke="#1A0C04" stroke-width="1" fill="none" opacity="0.5"/>
-            <path d="M290 164 Q284 174 272 180" stroke="#1A0C04" stroke-width="1" fill="none" opacity="0.5"/>
+              <!-- NECK -->
+              <path d="M259 182 Q268 177 276 182 L278 197 Q268 201 257 197 Z" fill="#9A6838"/>
 
-            <!-- Laurel wreath -->
-            <path d="M244 150 Q250 136 262 128 Q270 124 278 126 Q286 128 292 138 Q298 148 296 156" stroke="#3A6A10" stroke-width="3" fill="none"/>
-            <!-- Wreath leaves (pairs) -->
-            <ellipse cx="248" cy="146" rx="7" ry="4.5" fill="#4A7A18" transform="rotate(-25 248 146)"/>
-            <ellipse cx="256" cy="136" rx="7" ry="4.5" fill="#5A8A22" transform="rotate(-45 256 136)"/>
-            <ellipse cx="268" cy="126" rx="7" ry="4.5" fill="#4A7A18" transform="rotate(-10 268 126)"/>
-            <ellipse cx="282" cy="127" rx="7" ry="4.5" fill="#5A8A22" transform="rotate(15 282 127)"/>
-            <ellipse cx="292" cy="136" rx="7" ry="4.5" fill="#4A7A18" transform="rotate(35 292 136)"/>
-            <ellipse cx="298" cy="150" rx="6" ry="4" fill="#5A8A22" transform="rotate(50 298 150)"/>
-            <!-- Wreath berries -->
-            <circle cx="262" cy="130" r="2.5" fill="#8B0000" opacity="0.7"/>
-            <circle cx="278" cy="124" r="2.5" fill="#8B0000" opacity="0.7"/>
-            <circle cx="290" cy="132" r="2.5" fill="#8B0000" opacity="0.7"/>
+              <!-- HEAD (dramatic, high-contrast side lighting) -->
+              <!-- Shadow side base -->
+              <ellipse cx="268" cy="163" rx="30" ry="32" fill="#3A2008"/>
+              <!-- Lit side overlay -->
+              <ellipse cx="272" cy="162" rx="26" ry="28" fill="#9A6838"/>
+              <!-- Deep shadow on left (away from light) -->
+              <path d="M242 155 Q238 163 238 174 Q238 183 243 190 Q238 182 237 170 Q237 157 242 150 Z" fill="rgba(0,0,0,0.38)"/>
+              <!-- Warm highlight on lit right side -->
+              <path d="M292 149 Q299 159 299 172 Q299 184 292 191 Q296 183 298 173 Q298 160 292 149 Z" fill="rgba(255,240,180,0.22)"/>
 
-            <!-- Motion lines (speed) -->
-            <line x1="158" y1="210" x2="196" y2="214" stroke="#C8B870" stroke-width="1.8" stroke-dasharray="5,4" opacity="0.65"/>
-            <line x1="153" y1="232" x2="192" y2="234" stroke="#C8B870" stroke-width="1.4" stroke-dasharray="4,4" opacity="0.55"/>
-            <line x1="156" y1="254" x2="192" y2="252" stroke="#C8B870" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.45"/>
+              <!-- Dark curly hair (thick, Greek) -->
+              <path d="M241 156 Q243 132 257 120 Q268 111 280 120 Q292 132 294 156" fill="#180E04"/>
+              <path d="M241 157 Q237 136 244 120 Q251 112 261 110" fill="#180E04"/>
+              <path d="M295 157 Q299 136 292 120 Q285 112 275 110" fill="#180E04"/>
+              <!-- Curl texture (strong) -->
+              <path d="M243 152 Q238 139 245 130 Q252 123 258 130" stroke="#0C0604" stroke-width="2.5" fill="none"/>
+              <path d="M293 152 Q298 139 291 130 Q284 123 278 130" stroke="#0C0604" stroke-width="2.5" fill="none"/>
+              <path d="M255 114 Q268 108 281 114" stroke="#0C0604" stroke-width="2" fill="none"/>
+              <path d="M246 142 Q250 134 256 138" stroke="#0C0604" stroke-width="2" fill="none"/>
+              <path d="M290 142 Q286 134 280 138" stroke="#0C0604" stroke-width="2" fill="none"/>
+              <!-- Hair lit on right side -->
+              <path d="M284 113 Q293 122 295 134" stroke="#282008" stroke-width="3.5" fill="none" opacity="0.48"/>
 
-            <!-- Distant Athens / city suggestion -->
-            <rect x="340" y="198" width="12" height="42" fill="#D8D0B8" opacity="0.5"/>
-            <path d="M336 198 L346 186 L356 198 Z" fill="#D0C8B0" opacity="0.5"/>
-            <rect x="358" y="206" width="10" height="34" fill="#D0C8B0" opacity="0.4"/>
-            <path d="M354 206 L363 196 L372 206 Z" fill="#C8C0A8" opacity="0.4"/>
+              <!-- FACE FEATURES (3/4 view, both eyes, dramatic light) -->
+              <!-- Near eye (right — toward light source, brighter) -->
+              <ellipse cx="283" cy="157" rx="7.5" ry="6.5" fill="#ECD8A8"/>
+              <ellipse cx="284" cy="157" rx="4.2" ry="4.2" fill="#140A02"/>
+              <circle  cx="284" cy="157" r="2.8"             fill="#080402"/>
+              <circle  cx="286" cy="155.5" r="1.8"           fill="rgba(255,255,220,0.82)"/>
+              <path d="M276 154 Q283 151 291 154" stroke="#180A02" stroke-width="2" fill="none"/>
+              <path d="M276 159 Q283 162 290 159" stroke="#8A5020" stroke-width="1" fill="none" opacity="0.45"/>
+              <!-- Near brow (strong, Greek) -->
+              <path d="M275 149 Q283 146 292 149" stroke="#0C0602" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-            <!-- Dust particles under feet -->
-            <circle cx="240" cy="306" r="3" fill="#C8A840" opacity="0.3"/>
-            <circle cx="252" cy="309" r="2" fill="#C8A840" opacity="0.25"/>
-            <circle cx="228" cy="308" r="2.5" fill="#C8A840" opacity="0.2"/>
+              <!-- Far eye (left — in shadow, slightly smaller) -->
+              <ellipse cx="258" cy="159" rx="6"   ry="5.2" fill="#D8C898"/>
+              <ellipse cx="259" cy="159" rx="3.4" ry="3.4" fill="#140A02"/>
+              <circle  cx="259" cy="159" r="2.2"            fill="#080402"/>
+              <circle  cx="260.5" cy="157.8" r="1.2"        fill="rgba(255,255,220,0.72)"/>
+              <path d="M252 156 Q258 153 265 156" stroke="#180A02" stroke-width="1.6" fill="none"/>
+              <!-- Far brow -->
+              <path d="M251 151 Q258 148 266 151" stroke="#0C0602" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+              <!-- Nose (strong classical bridge) -->
+              <path d="M270 164 Q274 172 284 170" stroke="#7A4E22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <ellipse cx="279" cy="172" rx="3.5" ry="2.5" fill="#5A3A14" opacity="0.52"/>
+
+              <!-- Mouth (open — gasping, Pheidippides' final effort) -->
+              <path d="M260 180 Q269 185 280 181" stroke="#7A3E18" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M263 181 Q269 185 277 182" fill="#4A2008" opacity="0.55"/>
+
+              <!-- Greek beard (strong, matted with sweat) -->
+              <path d="M245 165 Q248 177 258 184 Q268 190 280 185 Q291 180 295 167" stroke="#180A02" stroke-width="3"   fill="none"/>
+              <path d="M247 167 Q251 180 263 187" stroke="#0C0602" stroke-width="1.8" fill="none" opacity="0.50"/>
+              <path d="M293 167 Q287 180 275 187" stroke="#0C0602" stroke-width="1.8" fill="none" opacity="0.50"/>
+              <path d="M250 172 Q254 179 262 183 Q268 186 276 183 Q284 179 288 173" stroke="#080402" stroke-width="1.2" fill="none" opacity="0.42"/>
+              <!-- Sweat on brow (dramatic effort) -->
+              <ellipse cx="270" cy="145" rx="2" ry="1.5" fill="rgba(200,180,100,0.4)"/>
+              <ellipse cx="285" cy="147" rx="1.5" ry="1"  fill="rgba(200,180,100,0.35)"/>
+
+              <!-- Laurel wreath (hero's crown) -->
+              <path d="M241 153 Q246 134 260 125 Q268 121 276 123 Q284 125 291 136 Q299 149 298 160" stroke="#284A0E" stroke-width="4" fill="none"/>
+              <ellipse cx="245" cy="149" rx="9" ry="5.5" fill="#385818" transform="rotate(-30 245 149)"/>
+              <ellipse cx="253" cy="138" rx="9" ry="5.5" fill="#4A6820" transform="rotate(-50 253 138)"/>
+              <ellipse cx="263" cy="127" rx="9" ry="5.5" fill="#385818" transform="rotate(-14 263 127)"/>
+              <ellipse cx="277" cy="124" rx="9" ry="5.5" fill="#4A6820" transform="rotate(14 277 124)"/>
+              <ellipse cx="289" cy="133" rx="9" ry="5.5" fill="#385818" transform="rotate(38 289 133)"/>
+              <ellipse cx="296" cy="148" rx="8" ry="5"   fill="#4A6820" transform="rotate(56 296 148)"/>
+              <!-- Berries -->
+              <circle cx="260" cy="127" r="3.5" fill="#5A0808" opacity="0.85"/>
+              <circle cx="276" cy="121" r="3.5" fill="#5A0808" opacity="0.85"/>
+              <circle cx="291" cy="131" r="3.5" fill="#5A0808" opacity="0.85"/>
+
+              <!-- Speed/motion lines (horizontal, suggesting great velocity) -->
+              <line x1="147" y1="210" x2="194" y2="215" stroke="#C0A850" stroke-width="2.2" stroke-dasharray="7,4" opacity="0.52"/>
+              <line x1="144" y1="234" x2="190" y2="236" stroke="#C0A850" stroke-width="1.7" stroke-dasharray="6,4" opacity="0.42"/>
+              <line x1="148" y1="258" x2="190" y2="255" stroke="#C0A850" stroke-width="1.4" stroke-dasharray="6,4" opacity="0.35"/>
+
+              <!-- Distant Athens skyline (acropolis hint) -->
+              <rect x="344" y="194" width="16" height="50" fill="#B8B068" opacity="0.58"/>
+              <path d="M340 194 L352 179 L364 194 Z" fill="#B0A860" opacity="0.58"/>
+              <rect x="370" y="203" width="12" height="42" fill="#A8A058" opacity="0.48"/>
+              <path d="M366 203 L376 191 L386 203 Z" fill="#A09850" opacity="0.48"/>
+              <rect x="392" y="208" width="10" height="38" fill="#A8A058" opacity="0.38"/>
+
+              <!-- Dust cloud under feet -->
+              <ellipse cx="236" cy="312" rx="5"   ry="3.5" fill="#C8A838" opacity="0.38"/>
+              <ellipse cx="249" cy="315" rx="3.5" ry="2.5" fill="#C8A838" opacity="0.30"/>
+              <ellipse cx="222" cy="314" rx="4"   ry="3"   fill="#C8A838" opacity="0.24"/>
+              <ellipse cx="255" cy="310" rx="2.5" ry="2"   fill="#C8A838" opacity="0.20"/>
+
+            </g><!-- end sepia filter group -->
+
+            <!-- ── DRAMATIC SIDE-LIGHTING OVERLAY (left shadow gradient) ── -->
+            <rect width="520" height="400" fill="url(#dag_sidelight)"/>
+
+            <!-- ── AGING ARTIFACTS (applied after sepia for authenticity) ── -->
+            <!-- Plate scratches (thin diagonal white lines) -->
+            <line x1="42"  y1="28"  x2="79"  y2="44"  stroke="rgba(255,252,220,0.14)" stroke-width="0.8"/>
+            <line x1="378" y1="14"  x2="418" y2="34"  stroke="rgba(255,252,220,0.10)" stroke-width="0.6"/>
+            <line x1="10"  y1="178" x2="38"  y2="224" stroke="rgba(255,252,220,0.10)" stroke-width="0.7"/>
+            <line x1="482" y1="88"  x2="514" y2="148" stroke="rgba(255,252,220,0.09)" stroke-width="0.6"/>
+            <line x1="196" y1="7"   x2="238" y2="22"  stroke="rgba(255,252,220,0.08)" stroke-width="0.6"/>
+            <line x1="56"  y1="352" x2="98"  y2="386" stroke="rgba(255,252,220,0.09)" stroke-width="0.6"/>
+            <line x1="428" y1="338" x2="470" y2="392" stroke="rgba(255,252,220,0.09)" stroke-width="0.7"/>
+            <line x1="260" y1="4"   x2="295" y2="18"  stroke="rgba(255,252,220,0.07)" stroke-width="0.5"/>
+            <!-- Micro-scratches -->
+            <line x1="88"  y1="190" x2="104" y2="198" stroke="rgba(255,252,220,0.08)" stroke-width="0.5"/>
+            <line x1="440" y1="165" x2="460" y2="175" stroke="rgba(255,252,220,0.07)" stroke-width="0.5"/>
+
+            <!-- Dust spots (dark inclusion marks on plate) -->
+            <circle cx="86"  cy="43"  r="2.8" fill="rgba(0,0,0,0.14)"/>
+            <circle cx="418" cy="26"  r="2.2" fill="rgba(0,0,0,0.12)"/>
+            <circle cx="490" cy="185" r="2.5" fill="rgba(0,0,0,0.11)"/>
+            <circle cx="28"  cy="325" r="2"   fill="rgba(0,0,0,0.12)"/>
+            <circle cx="464" cy="350" r="2.8" fill="rgba(0,0,0,0.12)"/>
+            <circle cx="152" cy="16"  r="2"   fill="rgba(0,0,0,0.10)"/>
+            <circle cx="352" cy="378" r="2.5" fill="rgba(0,0,0,0.12)"/>
+            <circle cx="320" cy="52"  r="1.8" fill="rgba(0,0,0,0.09)"/>
+            <circle cx="190" cy="372" r="2"   fill="rgba(0,0,0,0.10)"/>
+
+            <!-- Halation/light bloom (overexposed bright areas bleed slightly) -->
+            <circle cx="428" cy="68"  r="30" fill="rgba(255,252,195,0.07)"/>
+            <circle cx="428" cy="68"  r="16" fill="rgba(255,252,195,0.05)"/>
+
+            <!-- ── VIGNETTE (heavy daguerreotype-era circular falloff) ── -->
+            <rect width="520" height="400" fill="url(#dag_vig)"/>
+
+            <!-- Corner burn-in (extreme, very dark corners like old plates) -->
+            <circle cx="0"   cy="0"   r="95"  fill="rgba(0,0,0,0.55)"/>
+            <circle cx="520" cy="0"   r="95"  fill="rgba(0,0,0,0.55)"/>
+            <circle cx="0"   cy="400" r="95"  fill="rgba(0,0,0,0.55)"/>
+            <circle cx="520" cy="400" r="95"  fill="rgba(0,0,0,0.55)"/>
+
+            <!-- Overall warm sepia tint wash (glass-plate amber) -->
+            <rect width="520" height="400" fill="rgba(185,155,78,0.07)"/>
+
           </svg>
-          <p class="hero-caption">Illustration: Pheidippides, the legendary Greek messenger, races from Marathon to Athens &mdash; 490 BC.</p>
+          <p class="hero-caption">Photograph: Pheidippides, the Athenian herald, races from the plains of Marathon to Athens &mdash; 490 BC.</p>
         </figure>
 
         <!-- FACTS flowing right of and below the image -->
