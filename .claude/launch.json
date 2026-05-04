@@ -4,7 +4,7 @@
     {
       "name": "Static Site (Python)",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3000"],
+      "runtimeArgs": ["server.py"],
       "port": 3000
     }
   ]
